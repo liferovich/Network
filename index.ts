@@ -3,6 +3,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { router } from './routes/index';
 import { initDatabase } from './database/initDatabase';
+import { errorMiddleware } from './middlewares/error.middleware';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 app.use('/api', router);
+app.use(errorMiddleware);
 
 app.listen(PORT, async () => {
   console.log(`Server started on PORT = ${PORT}`);

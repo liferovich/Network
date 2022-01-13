@@ -20,7 +20,7 @@ const Post = sequelize.define('Post', {
   },
   date: {
     type: DataTypes.DATE,
-    defaultValue: '',
+    defaultValue: sequelize.fn('now'),
   },
   user_id: {
     type: DataTypes.INTEGER,

@@ -18,7 +18,7 @@ const User = sequelize.define('User', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  isActevated: {
+  isActivated: {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
   },
