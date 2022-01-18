@@ -1,0 +1,12 @@
+import { FC } from 'react';
+
+const ActivatePage: FC = () => {
+
+  return (
+    <div>
+      <h1>Please, activate your Email!</h1>
+    </div>
+  );
+};
+
+export default ActivatePage;

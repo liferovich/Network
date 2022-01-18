@@ -37,7 +37,6 @@ const Profile = sequelize.define('Profile', {
   },
   avatar: {
     type: DataTypes.STRING,
-    defaultValue: '/',
   },
   instagram: {
     type: DataTypes.STRING,

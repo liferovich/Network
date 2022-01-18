@@ -1,8 +1,12 @@
-// import express from 'express';
+import express from 'express';
 import { ApiError } from '../exceptions/api.error';
 
-export function errorMiddleware(err: any, req: any, res: any) {
-  //   console.log(err);
+export function errorMiddleware(
+  err: express.ErrorRequestHandler,
+  req: express.Request,
+  res: express.Response
+) {
+  console.log(err);
 
   if (err instanceof ApiError) {
     return res
