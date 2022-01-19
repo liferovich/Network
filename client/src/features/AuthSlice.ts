@@ -9,6 +9,7 @@ const initialState = {
   user: {},
   isAuth: false,
   isLoading: false,
+  id: 0,
 };
 
 export const login = createAsyncThunk(
@@ -19,7 +20,6 @@ export const login = createAsyncThunk(
   ) => {
     try {
       const response = await AuthService.login(email, password);
-      console.log(response)
 
       return response.data;
     } catch (err: any) {
@@ -76,6 +76,22 @@ export const checkAuth = createAsyncThunk(
   }
 );
 
+export const deleteUser = createAsyncThunk(
+  'user/deleteUser',
+  async (id: number, { rejectWithValue }) => {
+    setLoading(true);
+    try {
+      await AuthService.deleteUser(id);
+
+      return;
+    } catch (err: any) {
+      return rejectWithValue(err.response?.data?.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: 'user',
   initialState,
@@ -95,6 +111,7 @@ const authSlice = createSlice({
       localStorage.setItem('token', action.payload.accessToken);
       state.isAuth = true;
       state.user = action.payload.user;
+      state.id = Number(action.payload.user.id);
     });
     builder.addCase(login.rejected, (state, action) => {
       console.log(action.payload);
@@ -103,6 +120,7 @@ const authSlice = createSlice({
       localStorage.setItem('token', action.payload.accessToken);
       state.isAuth = true;
       state.user = action.payload.user;
+      state.id = Number(action.payload.user.id);
     });
     builder.addCase(register.rejected, (state, action) => {
       console.log(action.payload);
@@ -111,6 +129,7 @@ const authSlice = createSlice({
       localStorage.removeItem('token');
       state.isAuth = false;
       state.user = {} as IUser;
+      state.id = 0;
     });
     builder.addCase(logout.rejected, (state, action) => {
       console.log(action.payload);
@@ -120,6 +139,7 @@ const authSlice = createSlice({
       console.log(action.payload);
       state.isAuth = true;
       state.user = action.payload.user;
+      state.id = Number(action.payload.user.id);
     });
     builder.addCase(checkAuth.rejected, (state, action) => {
       console.log(action.payload);
@@ -131,4 +151,5 @@ export const { setUser, setAuth, setLoading } = authSlice.actions;
 export const isAuth = (state: any) => state.user.isAuth; //ANYYYYY
 export const isLoading = (state: any) => state.user.isLoading; //ANYYYYY
 export const isActivated = (state: any) => state.user.user.isActivated; //ANYYYYY
+export const id = (state: any) => state.user.id; //ANYYYYY
 export default authSlice.reducer;

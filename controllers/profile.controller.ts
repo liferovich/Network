@@ -16,6 +16,21 @@ class ProfileController {
       next(e);
     }
   }
+  async editProfile(
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) {
+    try {
+      const id = req.body.profile.id;
+      const profile = req.body.profile;
+      const response = await profileService.editProfile(id, profile);
+
+      return res.status(200).json(response);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 export default new ProfileController();

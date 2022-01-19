@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import {default as authReducer} from '../features/AuthSlice';
+import { default as authReducer } from '../features/AuthSlice';
+import { default as profileReducer } from '../features/ProfileSlice';
 
 export const store = configureStore({
   reducer: {
     user: authReducer,
+    profile: profileReducer,
   },
 });
 

@@ -20,4 +20,8 @@ export default class AuthService {
   static async logout(): Promise<void> {
     return api.post('/auth/logout');
   }
+
+  static async deleteUser(id: number): Promise<void> {
+    return api.delete(`/profile/delete/${id}`);
+  }
 }

@@ -7,7 +7,7 @@ import NewsPage from '../components/NewsPage';
 import MessagesPage from '../components/MessagesPage';
 import EditPage from '../components/user/EditPage';
 
-export function useRoutes (authenticated: any, activated: boolean) {
+export function useRoutes(authenticated: any, activated: boolean) {
   if (authenticated && activated) {
     return (
       <Routes>
@@ -34,4 +34,4 @@ export function useRoutes (authenticated: any, activated: boolean) {
       </Routes>
     );
   }
-};
+}

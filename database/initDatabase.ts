@@ -17,7 +17,9 @@ User.hasOne(Role);
 Role.belongsTo(User);
 
 User.hasOne(Profile);
-Profile.belongsTo(User);
+Profile.belongsTo(User, {
+  onDelete: 'CASCADE',
+});
 
 User.hasOne(Token);
 Token.belongsTo(User);

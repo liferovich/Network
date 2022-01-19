@@ -35,6 +35,17 @@ const Profile = sequelize.define('Profile', {
     values: ['male', 'female'],
     defaultValue: 'male',
   },
+  email: {
+    type: DataTypes.STRING,
+  },
+  phone: {
+    type: DataTypes.STRING,
+  },
+  status: {
+    type: DataTypes.ENUM,
+    values: ['active', 'passive'],
+    defaultValue: 'passive',
+  },
   avatar: {
     type: DataTypes.STRING,
   },

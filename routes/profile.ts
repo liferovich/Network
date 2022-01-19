@@ -5,5 +5,6 @@ import { default as profileController } from '../controllers/profile.controller'
 export const profileRouter = Router();
 
 profileRouter.get('/:id', profileController.getProfile);
-// profileRouter.get('/', authMiddleware, profileController.getProfile);
+profileRouter.put('/edit', profileController.editProfile);
+// profileRouter.get('/:id', authMiddleware, profileController.getProfile);
 // profileRouter.get('/edit', authMiddleware, profileController.editProfile);
