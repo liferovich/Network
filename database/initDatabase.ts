@@ -18,17 +18,22 @@ Role.belongsTo(User);
 
 User.hasOne(Profile);
 Profile.belongsTo(User, {
-  onDelete: 'CASCADE',
+  onDelete: 'cascade',
 });
 
 User.hasOne(Token);
-Token.belongsTo(User);
+Token.belongsTo(User, {
+  onDelete: 'cascade',
+});
 
-User.hasMany(Friend);
-Friend.belongsTo(User);
+Friend.belongsTo(User, {
+  onDelete: 'cascade',
+});
 
 User.hasMany(Album);
-Album.belongsTo(User);
+Album.belongsTo(User, {
+  onDelete: 'cascade',
+});
 Album.hasMany(Photo);
 Photo.belongsTo(Album);
 

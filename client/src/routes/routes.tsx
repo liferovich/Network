@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from '../components/auth/LoginPage';
 import ActivatePage from '../components/auth/ActivatePage';
 import ProfilePage from '../components/user/ProfilePage';
-import FriendsPage from '../components/FriendsPage';
+import FriendsPage from '../components/friends/FriendsPage';
 import NewsPage from '../components/NewsPage';
 import MessagesPage from '../components/MessagesPage';
 import EditPage from '../components/user/EditPage';

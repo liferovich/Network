@@ -1,0 +1,223 @@
+.search {
+  margin-left: 5px;
+  margin-right: 25px;
+}
+.form-search {
+  background: white;
+  box-shadow: 0px 1px 3px rgba(32, 75, 146, 0.15);
+  border-radius: 5px;
+  padding: 25px;
+  position: relative;
+}
+.form-search input {
+  padding: 9px;
+  padding-left: 43px;
+  border: 1px solid #dae1e8;
+  box-sizing: border-box;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 13px;
+  line-height: 18px;
+  color: #000;
+  outline: none;
+}
+.form-search input:focus {
+  box-shadow: 0px 1px 3px rgba(32, 75, 146, 0.15);
+}
+
+.form-search .input-search {
+  position: relative;
+}
+.form-search .input-search::before {
+  content: '';
+  background-image: url('img/search.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  width: 24px;
+  height: 24px;
+  transform: translateY(-50%);
+}
+#btn-search {
+  font-family: 'OpenSans-Bold';
+  width: 100%;
+  padding: 10px;
+  text-transform: uppercase;
+  background: #5495ff;
+  border-radius: 3px;
+  font-size: 12px;
+  border: none;
+  color: white;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.tabs-search .tab {
+  display: inline-block;
+  padding: 0 12px 16px;
+}
+.tabs-search .tab p {
+  font-size: 11px;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #afb7bf;
+  font-family: 'OpenSans-Bold';
+}
+.tabs-search .tab p.active p {
+  color: grey;
+}
+.tabs-search .tab .active {
+  position: relative;
+}
+.tabs-search .tab .active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #5495ff;
+  border-radius: 3px;
+  width: 100%;
+  height: 3px;
+}
+p.count,
+.count span {
+  font-family: 'OpenSans-Bold';
+  font-size: 13px;
+  line-height: 15px;
+  color: #636c75;
+  padding: 0 12px;
+  line-height: 20px;
+}
+.count span {
+  padding: 0;
+}
+.employee {
+  margin: 5px;
+  background: white;
+  box-shadow: 0px 1px 3px rgba(32, 75, 146, 0.15);
+  border-radius: 5px;
+  padding: 20px;
+}
+.employee-photo {
+  text-align: center;
+}
+.employee-photo img {
+  max-height: 120px;
+}
+.employee-name {
+  margin-top: 16px;
+  margin-bottom: 30px;
+}
+.employee-name h4 {
+  font-size: 18px;
+  line-height: 20px;
+  text-align: center;
+  color: grey;
+  font-family: 'OpenSans-Bold';
+}
+.employee p {
+  font-family: 'OpenSans-Bold';
+  font-size: 13px;
+  line-height: 15px;
+  text-align: center;
+  color: #afb7bf;
+  margin-top: 6px;
+}
+.addition-info {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #eceff1;
+  padding-top: 20px;
+  margin: 0 5px;
+}
+.department p,
+.room p {
+  font-family: 'OpenSans-Bold';
+  font-size: 12px;
+  line-height: 15px;
+  color: grey;
+  margin-left: 7px;
+}
+.department,
+.room {
+  display: flex;
+  align-items: center;
+}
+.tabs-show .tab-3,
+.tabs-show .tab-1 {
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+.tabs-show .tab-3 {
+  background-image: url(../img/grid.png);
+  margin-right: 3px;
+}
+.tabs-show .tab-1 {
+  background-image: url(../img/list.png);
+}
+
+.employees-top,
+.tabs-show {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+}
+.tabs-show .active {
+  background-color: white;
+  box-shadow: 0px 1px 3px rgba(32, 75, 146, 0.15);
+}
+
+.employees .tab-1 .col-lg-4 {
+  width: 100%;
+  flex: 0 0 100%;
+}
+.employees .tab-1 .employee {
+  display: flex;
+}
+.employees .tab-1 .employee .employee-info {
+  margin-left: 16px;
+  width: 100%;
+}
+.employees .tab-1 .employee .employee-name h4,
+.employees .tab-1 .employee p {
+  text-align: left;
+}
+.employees .tab-1 .employee .addition-info {
+  justify-content: flex-start;
+}
+.employees .tab-1 .employee .room {
+  margin-left: 30px;
+}
+.notfound {
+  background: white;
+  box-shadow: 0px 1px 3px rgba(32, 75, 146, 0.15);
+  border-radius: 5px;
+  width: 100%;
+  padding: 60px;
+}
+.notfound-img {
+  border: 2px dashed #afb7bf;
+  width: fit-content;
+  margin: auto;
+}
+.notfound h4 {
+  font-size: 14px;
+  line-height: 19px;
+  text-align: center;
+  color: grey;
+  font-family: 'OpenSans-Bold';
+  margin-top: 2px;
+}
+.notfound p {
+  font-size: 13px;
+  line-height: 18px;
+  text-align: center;
+  color: #818d99;
+  margin-top: 7px;
+}

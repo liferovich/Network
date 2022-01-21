@@ -1,6 +1,5 @@
 export interface ProfileResponse {
     id: number,
-    user_id: number,
     firstname: string,
     lastname: string,
     age: number,

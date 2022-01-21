@@ -4,24 +4,12 @@ class ProfileService {
   async getProfile(id: string) {
     let profile = await sequelize.model('Profile').findOne({
       where: {
-        user_id: id,
+        UserId: id,
       },
     });
 
     if (!profile) {
-      profile = (
-        await sequelize.model('Profile').create({
-          user_id: id,
-          UserId: id,
-          firstname: '',
-          lastname: '',
-          age: 0,
-        })
-      ).get({ plain: true });
-
-      if (!profile) {
-        throw new Error('Crashed creating profile');
-      }
+      throw new Error('Crashed creating profile');
     }
 
     return profile;
@@ -31,7 +19,6 @@ class ProfileService {
     id: string,
     profile: {
       id: number;
-      user_id: number;
       firstname: string;
       lastname: string;
       age: number;
@@ -44,17 +31,12 @@ class ProfileService {
       UserId: number;
     }
   ) {
-    const updatedProfile = await sequelize.model('Profile').update(
-      {
-        firstname: profile.firstname,
+    const updatedProfile = await sequelize.model('Profile').update(profile, {
+      where: {
+        id,
       },
-      {
-        where: {
-          id,
-        },
-        returning: true,
-      }
-    );
+      returning: true,
+    });
 
     if (!updatedProfile) {
       console.log('Crashed editing profile');
@@ -67,9 +49,21 @@ class ProfileService {
   }
 
   async deleteUser(id: number) {
+    await sequelize.model('Token').destroy({
+      where: {
+        id,
+      },
+    });
+
+    await sequelize.model('Profile').destroy({
+      where: {
+        id,
+      },
+    });
+
     let user = await sequelize.model('User').destroy({
       where: {
-        id: id,
+        id,
       },
     });
 

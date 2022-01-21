@@ -1,8 +1,13 @@
 import { FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { profile, isLoading, editProfile } from '../../features/ProfileSlice';
 import { deleteUser } from '../../features/AuthSlice';
+import {
+  profile,
+  isLoading,
+  editProfile,
+  deleteProfile,
+} from '../../features/ProfileSlice';
 import './Profile.css';
 
 const EditPage: FC = () => {
@@ -11,6 +16,17 @@ const EditPage: FC = () => {
   const [editedUserProfile, setEditedUserProfile] = useState(userProfile);
   const dispatch = useDispatch();
   const history = useNavigate();
+
+  // const avatarHandle = (e: any) => {
+  //   setEditedUserProfile({
+  //     ...editedUserProfile,
+  //     avatar: e.target.files[0],
+  //   });
+  //   const fd = new FormData();
+  //   fd.append('image', e.target.files[0], e.target.files[0].name);
+  //   axios.post('http://localhost:5000/profile/avatar', fd)
+  //   .then(res => console.log(res))
+  // };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEditedUserProfile({
@@ -27,7 +43,8 @@ const EditPage: FC = () => {
 
   const deleteUserProfile = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    dispatch(deleteUser(editedUserProfile.user_id));
+    dispatch(deleteProfile(editedUserProfile.UserId));
+    dispatch(deleteUser(editedUserProfile.UserId));
     // history('/login');
   };
 
@@ -49,10 +66,24 @@ const EditPage: FC = () => {
               <div className='user-image'>
                 <img
                   className='main-img'
-                  src='./img/upload.png'
+                  src={
+                    editedUserProfile.avatar
+                      ? editedUserProfile.avatar
+                      : './img/upload.png'
+                  }
                   id='user-image'
                   alt='user'
                 />
+                {/* <form action='/' encType='multipart/form-data' method='post'>
+                  <label className='custombutton' id='custombutton'>
+                    <input
+                      type='file'
+                      name='upload'
+                      accept='image/*'
+                      onChange={avatarHandle}
+                    />
+                  </label>
+                </form> */}
               </div>
             </div>
           </div>
@@ -124,7 +155,11 @@ const EditPage: FC = () => {
                         name='firstname'
                         id='firstname'
                         className='edit-text'
-                        value={editedUserProfile.firstname}
+                        value={
+                          editedUserProfile.firstname
+                            ? editedUserProfile.firstname
+                            : ''
+                        }
                         onChange={onChange}
                       />
                     </div>
@@ -148,7 +183,11 @@ const EditPage: FC = () => {
                         name='lastname'
                         id='lastname'
                         className='edit-text'
-                        value={editedUserProfile.lastname}
+                        value={
+                          editedUserProfile.lastname
+                            ? editedUserProfile.lastname
+                            : ''
+                        }
                         onChange={onChange}
                       />
                     </div>
@@ -172,7 +211,9 @@ const EditPage: FC = () => {
                         name='age'
                         id='age'
                         className='edit-text'
-                        value={editedUserProfile.age}
+                        value={
+                          editedUserProfile.age ? editedUserProfile.age : ''
+                        }
                         onChange={onChange}
                       />
                     </div>
@@ -244,7 +285,9 @@ const EditPage: FC = () => {
                         name='phone'
                         id='phone'
                         className='edit-text'
-                        value={editedUserProfile.phone}
+                        value={
+                          editedUserProfile.phone ? editedUserProfile.phone : ''
+                        }
                         onChange={onChange}
                       />
                     </div>
@@ -268,7 +311,9 @@ const EditPage: FC = () => {
                         name='email'
                         id='email'
                         className='edit-text'
-                        value={editedUserProfile.email}
+                        value={
+                          editedUserProfile.email ? editedUserProfile.email : ''
+                        }
                         onChange={onChange}
                       />
                     </div>
@@ -300,7 +345,11 @@ const EditPage: FC = () => {
                         name='instagram'
                         id='instagram'
                         className='edit-text'
-                        value={editedUserProfile.instagram}
+                        value={
+                          editedUserProfile.instagram
+                            ? editedUserProfile.instagram
+                            : ''
+                        }
                         onChange={onChange}
                       />
                     </div>
@@ -310,7 +359,9 @@ const EditPage: FC = () => {
             </div>
 
             <div className='block-info delete-block'>
-              <button className='red darken-3 btn' onClick={deleteUserProfile}>delete</button>
+              <button className='red darken-3 btn' onClick={deleteUserProfile}>
+                delete
+              </button>
             </div>
           </div>
         </div>

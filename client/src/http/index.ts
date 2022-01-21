@@ -1,9 +1,9 @@
 import axios, {
   AxiosRequestConfig,
-  AxiosRequestHeaders,
+  // AxiosRequestHeaders,
   AxiosResponse,
 } from 'axios';
-import { TypePredicateKind } from 'typescript';
+// import { TypePredicateKind } from 'typescript';
 import { AuthResponse } from '../models/response/AuthResponse';
 
 export const API_URL = 'http://localhost:5000/api';

@@ -36,6 +36,13 @@ class AuthService {
 
     await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
+    await sequelize.model('Profile').create({
+      UserId: user.id,
+    });
+    await sequelize.model('Friend').create({
+      UserId: user.id,
+    });
+
     return {
       ...tokens,
       user: userDto,

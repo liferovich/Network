@@ -9,7 +9,6 @@ export default class ProfileService {
 
   static async editProfile(profile: {
     id: number;
-    user_id: number;
     firstname: string;
     lastname: string;
     age: number;

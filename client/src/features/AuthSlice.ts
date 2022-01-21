@@ -144,6 +144,15 @@ const authSlice = createSlice({
     builder.addCase(checkAuth.rejected, (state, action) => {
       console.log(action.payload);
     });
+    builder.addCase(deleteUser.fulfilled, (state, action) => {
+      localStorage.removeItem('token');
+      state.isAuth = false;
+      state.user = {} as IUser;
+      state.id = 0;
+    });
+    builder.addCase(deleteUser.rejected, (state, action) => {
+      console.log(action.payload);
+    });
   },
 });
 

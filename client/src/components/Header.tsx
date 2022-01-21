@@ -41,7 +41,7 @@ export const Header = ({
               <NavLink to='/messages'>Messages</NavLink>
             </li>
             <li>
-              <p onClick={logoutHandler}>Выйти</p>
+              <p onClick={logoutHandler}>Logout</p>
             </li>
           </ul>
         </div>
@@ -57,7 +57,7 @@ export const Header = ({
           <span className='brand-logo'>VironIt</span>
           <ul id='nav-mobile' className='right hide-on-med-and-down'>
             <li>
-              <p onClick={logoutHandler}>Выйти</p>
+              <p onClick={logoutHandler}>Logout</p>
             </li>
           </ul>
         </div>

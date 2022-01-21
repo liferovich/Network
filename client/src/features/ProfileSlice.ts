@@ -27,7 +27,6 @@ export const editProfile = createAsyncThunk(
   async (
     profile: {
       id: number;
-      user_id: number;
       firstname: string;
       lastname: string;
       age: number;
@@ -43,6 +42,7 @@ export const editProfile = createAsyncThunk(
   ) => {
     setLoading(true);
     try {
+      console.log(profile);
       const response = await ProfileService.editProfile(profile);
 
       return response.data;
@@ -64,6 +64,9 @@ const profileSlice = createSlice({
     setLoading: (state, action) => {
       state.isLoading = action.payload;
     },
+    deleteProfile: (state, action) => {
+      state.profile = {};
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getProfile.fulfilled, (state, action) => {
@@ -81,7 +84,7 @@ const profileSlice = createSlice({
   },
 });
 
-export const { setLoading } = profileSlice.actions;
+export const { setLoading, deleteProfile } = profileSlice.actions;
 export const profile = (state: any) => state.profile.profile; //ANYYYYY
 export const isLoading = (state: any) => state.profile.isLoading; //ANYYYYY
 export default profileSlice.reducer;

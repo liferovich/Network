@@ -1,24 +1,20 @@
 import { sequelize } from '../database.state';
 import pkg from 'sequelize';
-import User from './User';
+// import User from './User';
 const { DataTypes } = pkg;
 
 const Friend = sequelize.define('Friend', {
-  user1_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: User,
-      key: 'id',
-    },
-  },
-  user2_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: User,
-      key: 'id',
-    },
+  // user_id: {
+  //   type: DataTypes.INTEGER,
+  //   allowNull: false,
+  //   references: {
+  //     model: User,
+  //     key: 'id',
+  //   },
+  // },
+  friends: {
+    type: DataTypes.ARRAY(DataTypes.INTEGER),
+    defaultValue: [],
   },
 });
 

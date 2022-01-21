@@ -16,6 +16,7 @@ class ProfileController {
       next(e);
     }
   }
+
   async editProfile(
     req: express.Request,
     res: express.Response,
@@ -31,6 +32,56 @@ class ProfileController {
       next(e);
     }
   }
+
+  async deleteProfile(
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) {
+    try {
+      const id = req.params.id;
+
+      await profileService
+        .deleteUser(Number(id))
+        .then(function (deletedRecord) {
+          if (deletedRecord === 1) {
+            res.status(200).json({ message: 'Deleted successfully' });
+          } else {
+            res.status(404).json({ message: 'record not found' });
+          }
+        })
+        .catch(function (error) {
+          res.status(500).json(error);
+        });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  // async editAvatar(
+  //   req: express.Request,
+  //   res: express.Response,
+  //   next: express.NextFunction
+  // ) {
+  //   try {
+  //     const id = req.params.id;
+
+  //     await profileService
+  //       .deleteUser(Number(id))
+  //       .then(function (deletedRecord) {
+  //         if (deletedRecord === 1) {
+  //           res.status(200).json({ message: 'Deleted successfully' });
+  //         } else {
+  //           res.status(404).json({ message: 'record not found' });
+  //         }
+  //       })
+  //       .catch(function (error) {
+  //         res.status(500).json(error);
+  //       });
+  //   } catch (e) {
+  //     next(e);
+  //   }
+  // }
 }
 
 export default new ProfileController();

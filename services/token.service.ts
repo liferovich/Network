@@ -45,7 +45,7 @@ class TokenService {
   async saveToken(userId: number, refreshToken: string) {
     const tokenData = await sequelize.model('Token').findOne({
       where: {
-        user_id: userId,
+        UserId: userId,
       },
     });
 
@@ -56,14 +56,14 @@ class TokenService {
         },
         {
           where: {
-            user_id: userId,
+            UserId: userId,
           },
         }
       );
     }
 
     const token = await sequelize.model('Token').create({
-      user_id: userId,
+      UserId: userId,
       refreshToken,
     });
 
