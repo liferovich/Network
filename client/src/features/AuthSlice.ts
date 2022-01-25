@@ -136,7 +136,6 @@ const authSlice = createSlice({
     });
     builder.addCase(checkAuth.fulfilled, (state, action) => {
       localStorage.setItem('token', action.payload.accessToken);
-      console.log(action.payload);
       state.isAuth = true;
       state.user = action.payload.user;
       state.id = Number(action.payload.user.id);

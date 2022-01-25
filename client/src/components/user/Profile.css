@@ -222,6 +222,12 @@ input[type='radio'] + label {
   text-align: right;
   margin-top: 4rem;
 }
+.btn-addfriend {
+  max-width: 250px;
+}
+.block-btn-add {
+  text-align: center;
+}
 
 @media (min-width: 992px) {
   .user-left {

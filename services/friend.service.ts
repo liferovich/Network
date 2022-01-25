@@ -20,6 +20,40 @@ class FriendService {
 
     return friends;
   }
+
+  async addFriendId(id: number, friendsIds: [number]) {
+    let friends = await sequelize
+      .model('Friend')
+      .update(
+        { friends: friendsIds },
+        { where: { UserId: id }, returning: true }
+      );
+
+    if (!friends) {
+      throw new Error('Crashed adding friends');
+    }
+
+    const data = friends[1][0].get();
+
+    return data.friends;
+  }
+
+  async deleteFriendId(id: number, friendsIds: [number]) {
+    let friends = await sequelize
+      .model('Friend')
+      .update(
+        { friends: friendsIds },
+        { where: { UserId: id }, returning: true }
+      );
+
+    if (!friends) {
+      throw new Error('Crashed deleting friends');
+    }
+
+    const data = friends[1][0].get();
+
+    return data.friends;
+  }
 }
 
 export default new FriendService();

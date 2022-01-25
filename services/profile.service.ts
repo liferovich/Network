@@ -1,8 +1,23 @@
 import { sequelize } from '../database/database.state';
+import { Op } from 'sequelize';
+
+type ProfileType = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  age: number;
+  avatar: string;
+  email: string;
+  phone: string;
+  sex: string;
+  status: string;
+  instagram: string;
+  UserId: number;
+};
 
 class ProfileService {
   async getProfile(id: string) {
-    let profile = await sequelize.model('Profile').findOne({
+    const profile = await sequelize.model('Profile').findOne({
       where: {
         UserId: id,
       },
@@ -15,22 +30,21 @@ class ProfileService {
     return profile;
   }
 
-  async editProfile(
-    id: string,
-    profile: {
-      id: number;
-      firstname: string;
-      lastname: string;
-      age: number;
-      avatar: string;
-      email: string;
-      phone: string;
-      sex: string;
-      status: string;
-      instagram: string;
-      UserId: number;
+  async getProfiles(friendsIds: Array<number>) {
+    const profiles = await sequelize.model('Profile').findAll({
+      where: {
+        UserId: { [Op.notIn]: friendsIds },
+      },
+    });
+
+    if (!profiles) {
+      throw new Error('Crashed creating profile');
     }
-  ) {
+
+    return profiles;
+  }
+
+  async editProfile(id: string, profile: ProfileType) {
     const updatedProfile = await sequelize.model('Profile').update(profile, {
       where: {
         id,

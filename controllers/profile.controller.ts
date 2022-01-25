@@ -17,6 +17,23 @@ class ProfileController {
     }
   }
 
+  async getProfiles(
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) {
+    try {
+      const userId = req.body.userId;
+      const friendsIds = req.body.friendsIds;
+      friendsIds.push(userId);
+      const profiles = await profileService.getProfiles(friendsIds);
+
+      return res.json(profiles);
+    } catch (e) {
+      next(e);
+    }
+  }
+
   async editProfile(
     req: express.Request,
     res: express.Response,

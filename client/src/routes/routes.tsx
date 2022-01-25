@@ -6,6 +6,7 @@ import FriendsPage from '../components/friends/FriendsPage';
 import NewsPage from '../components/NewsPage';
 import MessagesPage from '../components/MessagesPage';
 import EditPage from '../components/user/EditPage';
+import UserPage from '../components/user/UserPage';
 
 export function useRoutes(authenticated: any, activated: boolean) {
   if (authenticated && activated) {
@@ -14,9 +15,11 @@ export function useRoutes(authenticated: any, activated: boolean) {
         <Route path='/profile' element={<ProfilePage />} />
         <Route path='/edit' element={<EditPage />} />
         <Route path='/friends' element={<FriendsPage />} />
+        <Route path='/user/:id' element={<UserPage />} />
         <Route path='/news' element={<NewsPage />} />
         <Route path='/messages' element={<MessagesPage />} />
-        <Route path='*' element={<Navigate to='/profile' />} />
+        <Route path='/login' element={<Navigate to='/profile' />} />
+        {/* <Route path='*' element={<Navigate to='/profile' />} /> */}
       </Routes>
     );
   } else if (authenticated && !activated) {

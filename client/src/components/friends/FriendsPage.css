@@ -30,7 +30,7 @@
 }
 .form-search .input-search::before {
   content: '';
-  background-image: url('img/search.png');
+  /* background-image: url('img/search.png'); */
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
@@ -94,31 +94,31 @@ p.count,
 .count span {
   padding: 0;
 }
-.employee {
+.friend {
   margin: 5px;
   background: white;
   box-shadow: 0px 1px 3px rgba(32, 75, 146, 0.15);
   border-radius: 5px;
-  padding: 20px;
+  padding: 15px 20px;
 }
-.employee-photo {
+.friend-photo {
   text-align: center;
 }
-.employee-photo img {
+.friend-photo img {
   max-height: 120px;
 }
-.employee-name {
-  margin-top: 16px;
-  margin-bottom: 30px;
+.friend-name {
+  margin: 15px 0;
 }
-.employee-name h4 {
+.friend-name h4 {
   font-size: 18px;
   line-height: 20px;
   text-align: center;
   color: grey;
   font-family: 'OpenSans-Bold';
+  margin: 1rem 0;
 }
-.employee p {
+.friend p {
   font-family: 'OpenSans-Bold';
   font-size: 13px;
   line-height: 15px;
@@ -127,10 +127,10 @@ p.count,
   margin-top: 6px;
 }
 .addition-info {
-  display: flex;
-  justify-content: space-between;
+  /* display: flex;
+  justify-content: space-between; */
   border-top: 1px solid #eceff1;
-  padding-top: 20px;
+  padding-top: 15px;
   margin: 0 5px;
 }
 .department p,
@@ -140,6 +140,7 @@ p.count,
   line-height: 15px;
   color: grey;
   margin-left: 7px;
+  margin-bottom: 5px;
 }
 .department,
 .room {
@@ -155,14 +156,14 @@ p.count,
   cursor: pointer;
 }
 .tabs-show .tab-3 {
-  background-image: url(../img/grid.png);
+  /* background-image: url(../img/grid.png); */
   margin-right: 3px;
 }
 .tabs-show .tab-1 {
-  background-image: url(../img/list.png);
+  /* background-image: url(../img/list.png); */
 }
 
-.employees-top,
+.friends-top,
 .tabs-show {
   display: flex;
   justify-content: space-between;
@@ -173,25 +174,25 @@ p.count,
   box-shadow: 0px 1px 3px rgba(32, 75, 146, 0.15);
 }
 
-.employees .tab-1 .col-lg-4 {
+.friends .tab-1 .col-lg-4 {
   width: 100%;
   flex: 0 0 100%;
 }
-.employees .tab-1 .employee {
+.friends .tab-1 .friend {
   display: flex;
 }
-.employees .tab-1 .employee .employee-info {
+.friends .tab-1 .friend .friend-info {
   margin-left: 16px;
   width: 100%;
 }
-.employees .tab-1 .employee .employee-name h4,
-.employees .tab-1 .employee p {
+.friends .tab-1 .friend .friend-name h4,
+.friends .tab-1 .friend p {
   text-align: left;
 }
-.employees .tab-1 .employee .addition-info {
+.friends .tab-1 .friend .addition-info {
   justify-content: flex-start;
 }
-.employees .tab-1 .employee .room {
+.friends .tab-1 .friend .room {
   margin-left: 30px;
 }
 .notfound {
@@ -220,4 +221,18 @@ p.count,
   text-align: center;
   color: #818d99;
   margin-top: 7px;
+}
+.friends-page .department p, .friends-page .room p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.friends-page .department, .friends-page .room {
+  margin-bottom: 10px;
+}
+.btn-addfriend {
+  width: 100%;
+  font-size: 12px;
+  line-height: 30px;
+  height: 30px;
+  margin-top: 10px;
 }

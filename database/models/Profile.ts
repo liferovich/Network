@@ -12,11 +12,11 @@ const Profile = sequelize.define('Profile', {
   },
   firstname: {
     type: DataTypes.STRING,
-    defaultValue: '',
+    defaultValue: 'Anon',
   },
   lastname: {
     type: DataTypes.STRING,
-    defaultValue: '',
+    defaultValue: 'Anon',
   },
   age: {
     type: DataTypes.INTEGER,
