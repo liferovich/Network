@@ -38,7 +38,9 @@ Album.hasMany(Photo);
 Photo.belongsTo(Album);
 
 User.hasMany(Post);
-Post.belongsTo(User);
+Post.belongsTo(User, {
+  onDelete: 'cascade',
+});
 
 User.belongsToMany(Chat, { through: User_to_Chat });
 Chat.belongsToMany(User, { through: User_to_Chat });

@@ -1,0 +1,15 @@
+.btn-post {
+    min-width: 100px;
+}
+.post-field {
+    display: flex;
+    align-items: flex-end;
+}
+textarea.materialize-textarea {
+    margin-bottom: 0;
+    margin-right: 20px;
+    min-height: 6rem;
+}
+.news form {
+    max-width: 100%;
+}

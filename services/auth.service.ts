@@ -42,6 +42,12 @@ class AuthService {
     await sequelize.model('Friend').create({
       UserId: user.id,
     });
+    await sequelize.model('Post').create({
+      UserId: user.id,
+    });
+    await sequelize.model('Album').create({
+      UserId: user.id,
+    });
 
     return {
       ...tokens,

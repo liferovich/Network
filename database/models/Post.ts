@@ -1,6 +1,5 @@
 import { sequelize } from '../database.state';
 import pkg from 'sequelize';
-import User from './User';
 const { DataTypes } = pkg;
 
 const Post = sequelize.define('Post', {
@@ -10,10 +9,6 @@ const Post = sequelize.define('Post', {
     primaryKey: true,
     autoIncrement: true,
   },
-  title: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   text: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -21,14 +16,6 @@ const Post = sequelize.define('Post', {
   date: {
     type: DataTypes.DATE,
     defaultValue: sequelize.fn('now'),
-  },
-  user_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: User,
-      key: 'id',
-    },
   },
 });
 

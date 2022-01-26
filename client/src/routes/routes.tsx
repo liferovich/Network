@@ -3,7 +3,7 @@ import LoginPage from '../components/auth/LoginPage';
 import ActivatePage from '../components/auth/ActivatePage';
 import ProfilePage from '../components/user/ProfilePage';
 import FriendsPage from '../components/friends/FriendsPage';
-import NewsPage from '../components/NewsPage';
+import NewsPage from '../components/news/NewsPage';
 import MessagesPage from '../components/MessagesPage';
 import EditPage from '../components/user/EditPage';
 import UserPage from '../components/user/UserPage';
