@@ -1,0 +1,73 @@
+import express from 'express';
+import postService from '../services/post.service';
+
+class PostController {
+  async getPosts(
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) {
+    try {
+      const posts = await postService.getPosts();
+
+      return res.json(posts);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async addPost(
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) {
+    try {
+      const id = req.body.userId;
+      const text = req.body.text;
+      await postService.addPost(id, text);
+      const posts = await postService.getPosts();
+
+      return res.status(200).json(posts);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async editPost(
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) {
+    try {
+      const id = req.body.id;
+      const text = req.body.text;
+      const response = await postService.editPost(id, text);
+      const posts = await postService.getPosts();
+
+      return res.status(200).json(posts);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async deletePost(
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) {
+    try {
+      const id = req.params.id;
+
+      await postService.deletePost(Number(id));
+      const posts = await postService.getPosts();
+
+      return res.status(200).json(posts);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+
+}
+
+export default new PostController();

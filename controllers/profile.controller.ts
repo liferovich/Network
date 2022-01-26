@@ -64,7 +64,7 @@ class ProfileController {
           if (deletedRecord === 1) {
             res.status(200).json({ message: 'Deleted successfully' });
           } else {
-            res.status(404).json({ message: 'record not found' });
+            res.status(404).json({ message: 'Profile not found' });
           }
         })
         .catch(function (error) {

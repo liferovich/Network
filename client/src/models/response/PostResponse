@@ -1,0 +1,6 @@
+export interface PostResponse {
+  id: number;
+  text: string;
+  date: Date;
+  UserId: number;
+}

@@ -1,25 +1,21 @@
 import { AxiosResponse } from 'axios';
 import api from '../http';
-import { ProfileResponse } from '../models/response/Profileresponse';
+import { PostResponse } from '../models/response/PostResponse';
 
 export default class PostService {
-  static async getPosts(id: number): Promise<AxiosResponse<ProfileResponse>> {
-    return api.get<ProfileResponse>(`/post/${id}`);
+  static async getPosts(): Promise<AxiosResponse<Array<PostResponse>>> {
+    return api.get<Array<PostResponse>>(`/post/`);
   }
 
-  static async addPost(post: {
-    id: number;
-    firstname: string;
-    lastname: string;
-    age: number;
-    avatar: string;
-    email: string;
-    phone: string;
-    sex: string;
-    status: string;
-    instagram: string;
-    UserId: number;
-  }): Promise<AxiosResponse<ProfileResponse>> {
-    return api.post<ProfileResponse>(`/post/`, { post });
+  static async addPost(userId: number, text: string): Promise<AxiosResponse<Array<PostResponse>>> {
+    return api.post<Array<PostResponse>>(`/post/`, { userId, text });
+  }
+
+  static async editPost(id: number, text: string): Promise<AxiosResponse<Array<PostResponse>>> {
+    return api.put<Array<PostResponse>>(`/post/`, { id, text });
+  }
+
+  static async deletePost(id: number): Promise<AxiosResponse<Array<PostResponse>>> {
+    return api.delete<Array<PostResponse>>(`/post/${id}`);
   }
 }

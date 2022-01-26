@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import ProfileService from '../services/ProfileService';
+import PostService from '../services/PostService';
 
 const initialState = {
   posts: [{}],
@@ -8,10 +8,10 @@ const initialState = {
 
 export const getPosts = createAsyncThunk(
   'post/getposts',
-  async (id: number, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     setLoading(true);
     try {
-      const response = await ProfileService.getProfile(id);
+      const response = await PostService.getPosts();
 
       return response.data;
     } catch (err: any) {
@@ -25,25 +25,50 @@ export const getPosts = createAsyncThunk(
 export const addPost = createAsyncThunk(
   'post/addpost',
   async (
-    post: {
-      id: number;
-      firstname: string;
-      lastname: string;
-      age: number;
-      avatar: string;
-      email: string;
-      phone: string;
-      sex: string;
-      status: string;
-      instagram: string;
-      UserId: number;
-    },
+    { userId, text }: { userId: number, text: string },
     { rejectWithValue }
   ) => {
     setLoading(true);
     try {
-      console.log(post);
-      const response = await ProfileService.editProfile(post);
+      const response = await PostService.addPost(userId, text);
+
+      return response.data;
+    } catch (err: any) {
+      return rejectWithValue(err.response?.data?.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+);
+
+export const editPost = createAsyncThunk(
+  'post/addpost',
+  async (
+    { id, text }: { id: number, text: string },
+    { rejectWithValue }
+  ) => {
+    setLoading(true);
+    try {
+      const response = await PostService.editPost(id, text);
+
+      return response.data;
+    } catch (err: any) {
+      return rejectWithValue(err.response?.data?.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+);
+
+export const deletePost = createAsyncThunk(
+  'post/deletepost',
+  async (
+    id: number,
+    { rejectWithValue }
+  ) => {
+    setLoading(true);
+    try {
+      const response = await PostService.deletePost(id);
 
       return response.data;
     } catch (err: any) {
@@ -76,6 +101,18 @@ const postSlice = createSlice({
       state.posts = action.payload;
     });
     builder.addCase(addPost.rejected, (state, action) => {
+      console.log(action.payload);
+    });
+    builder.addCase(editPost.fulfilled, (state, action) => {
+      state.posts = action.payload;
+    });
+    builder.addCase(editPost.rejected, (state, action) => {
+      console.log(action.payload);
+    });
+    builder.addCase(deletePost.fulfilled, (state, action) => {
+      state.posts = action.payload;
+    });
+    builder.addCase(deletePost.rejected, (state, action) => {
       console.log(action.payload);
     });
   },
