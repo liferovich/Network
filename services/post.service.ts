@@ -70,10 +70,7 @@ class PostService {
   }
 
   async getProfiles(ids: [{ UserId: number }]) {
-    let users: number[] = [];
-    ids.forEach((item) => {
-      users.push(item.UserId);
-    });
+    const users: number[] = ids.map(item => item.UserId);
 
     const profiles = await sequelize.model('Profile').findAll({
       attributes: ['id', 'avatar', 'firstname', 'lastname', 'UserId'],
