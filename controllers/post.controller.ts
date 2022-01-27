@@ -8,9 +8,12 @@ class PostController {
     next: express.NextFunction
   ) {
     try {
-      const posts = await postService.getPosts();
+      const { posts, usersIds } = await postService.getPosts();
+      const profiles = await postService.getProfiles(
+        JSON.parse(JSON.stringify(usersIds))
+      );
 
-      return res.json(posts);
+      return res.json({ posts, profiles });
     } catch (e) {
       next(e);
     }
@@ -25,9 +28,12 @@ class PostController {
       const id = req.body.userId;
       const text = req.body.text;
       await postService.addPost(id, text);
-      const posts = await postService.getPosts();
+      const { posts, usersIds } = await postService.getPosts();
+      const profiles = await postService.getProfiles(
+        JSON.parse(JSON.stringify(usersIds))
+      );
 
-      return res.status(200).json(posts);
+      return res.json({ posts, profiles });
     } catch (e) {
       next(e);
     }
@@ -41,10 +47,13 @@ class PostController {
     try {
       const id = req.body.id;
       const text = req.body.text;
-      const response = await postService.editPost(id, text);
-      const posts = await postService.getPosts();
+      await postService.editPost(id, text);
+      const { posts, usersIds } = await postService.getPosts();
+      const profiles = await postService.getProfiles(
+        JSON.parse(JSON.stringify(usersIds))
+      );
 
-      return res.status(200).json(posts);
+      return res.json({ posts, profiles });
     } catch (e) {
       next(e);
     }
@@ -57,17 +66,17 @@ class PostController {
   ) {
     try {
       const id = req.params.id;
-
       await postService.deletePost(Number(id));
-      const posts = await postService.getPosts();
+      const { posts, usersIds } = await postService.getPosts();
+      const profiles = await postService.getProfiles(
+        JSON.parse(JSON.stringify(usersIds))
+      );
 
-      return res.status(200).json(posts);
+      return res.json({ posts, profiles });
     } catch (e) {
       next(e);
     }
   }
-
-
 }
 
 export default new PostController();

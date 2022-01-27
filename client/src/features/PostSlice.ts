@@ -3,6 +3,7 @@ import PostService from '../services/PostService';
 
 const initialState = {
   posts: [{}],
+  profiles: [{}],
   isLoading: false,
 };
 
@@ -42,7 +43,7 @@ export const addPost = createAsyncThunk(
 );
 
 export const editPost = createAsyncThunk(
-  'post/addpost',
+  'post/editpost',
   async (
     { id, text }: { id: number, text: string },
     { rejectWithValue }
@@ -92,25 +93,29 @@ const postSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getPosts.fulfilled, (state, action) => {
-      state.posts = action.payload;
+      state.posts = action.payload.posts;
+      state.profiles = action.payload.profiles;
     });
     builder.addCase(getPosts.rejected, (state, action) => {
       console.log(action.payload);
     });
     builder.addCase(addPost.fulfilled, (state, action) => {
-      state.posts = action.payload;
+      state.posts = action.payload.posts;
+      state.profiles = action.payload.profiles;
     });
     builder.addCase(addPost.rejected, (state, action) => {
       console.log(action.payload);
     });
     builder.addCase(editPost.fulfilled, (state, action) => {
-      state.posts = action.payload;
+      state.posts = action.payload.posts;
+      state.profiles = action.payload.profiles;
     });
     builder.addCase(editPost.rejected, (state, action) => {
       console.log(action.payload);
     });
     builder.addCase(deletePost.fulfilled, (state, action) => {
-      state.posts = action.payload;
+      state.posts = action.payload.posts;
+      state.profiles = action.payload.profiles;
     });
     builder.addCase(deletePost.rejected, (state, action) => {
       console.log(action.payload);
@@ -119,6 +124,7 @@ const postSlice = createSlice({
 });
 
 export const { setLoading } = postSlice.actions;
-export const posts = (state: any) => state.profile.posts; //ANYYYYY
-export const isLoading = (state: any) => state.profile.isLoading; //ANYYYYY
+export const posts = (state: any) => state.posts.posts; //ANYYYYY
+export const profiles = (state: any) => state.posts.profiles; //ANYYYYY
+export const isLoading = (state: any) => state.posts.isLoading; //ANYYYYY
 export default postSlice.reducer;

@@ -44,7 +44,7 @@ class ProfileController {
       const profile = req.body.profile;
       const response = await profileService.editProfile(id, profile);
 
-      return res.status(200).json(response);
+      return res.json(response);
     } catch (e) {
       next(e);
     }
@@ -62,13 +62,13 @@ class ProfileController {
         .deleteUser(Number(id))
         .then(function (deletedRecord) {
           if (deletedRecord === 1) {
-            res.status(200).json({ message: 'Deleted successfully' });
+            res.json({ message: 'Deleted successfully' });
           } else {
-            res.status(404).json({ message: 'Profile not found' });
+            res.json({ message: 'Profile not found' });
           }
         })
         .catch(function (error) {
-          res.status(500).json(error);
+          res.json(error);
         });
     } catch (e) {
       next(e);

@@ -1,15 +1,78 @@
 .btn-post {
-    min-width: 100px;
+  min-width: 100px;
 }
 .post-field {
-    display: flex;
-    align-items: flex-end;
+  display: flex;
+  align-items: flex-end;
 }
 textarea.materialize-textarea {
-    margin-bottom: 0;
-    margin-right: 20px;
-    min-height: 6rem;
+  margin-bottom: 0;
+  margin-right: 20px;
+  min-height: 6rem;
 }
 .news form {
-    max-width: 100%;
+  max-width: 100%;
+}
+img {
+  max-width: 100%;
+}
+.user-img {
+  width: 120px;
+  border-radius: 50%;
+}
+.post {
+  padding: 20px 20px 20px 0;
+  margin: 20px 0;
+  border: 1px solid #e9edf2;
+}
+.post .name {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.post-user {
+  text-align: center;
+  position: relative;
+}
+.post .user-status img {
+  width: 35px;
+  height: 35px;
+}
+.post .user-status {
+  position: absolute;
+  bottom: 16px;
+  left: 23px;
+}
+.btn-edit-post,
+.btn-cancel-post,
+.btn-edit-post:focus,
+.btn-cancel-post:focus {
+  border: none;
+  background: transparent;
+  font-size: 16px;
+}
+.btn-edit-post i,
+.btn-cancel-post i {
+  font-size: 16px;
+  position: relative;
+  top: 2px;
+}
+.edit-post {
+  text-align: right;
+}
+.post .row {
+  margin: 0;
+}
+.post .time {
+  color: grey;
+  font-size: 12px;
+}
+.likes-block {
+  display: flex;
+  justify-content: space-between;
+}
+.likes {
+  cursor: pointer;
+}
+.likes i {
+  color: #c62828;
 }

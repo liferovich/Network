@@ -237,3 +237,12 @@ input[type='radio'] + label {
     position: absolute;
   }
 }
+@media (max-width: 576px) {
+  .user {
+    padding: 0px;
+  }
+  .user-details {
+    padding-bottom: 20px;
+    justify-content: center;
+  }
+}

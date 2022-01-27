@@ -3,6 +3,7 @@ import { authRouter } from './auth';
 import { friendRouter } from './friend';
 import { profileRouter } from './profile';
 import { userRouter } from './user';
+import { postRouter } from './post';
 
 export const router = Router();
 
@@ -10,3 +11,4 @@ router.use('/auth', authRouter);
 router.use('/profile', profileRouter);
 router.use('/users', userRouter);
 router.use('/friends', friendRouter);
+router.use('/posts', postRouter);

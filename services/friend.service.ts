@@ -2,7 +2,7 @@ import { sequelize } from '../database/database.state';
 
 class FriendService {
   async getFriendsIds(id: number) {
-    let friendsIds = await sequelize
+    const friendsIds = await sequelize
       .model('Friend')
       .findOne({ where: { UserId: id } });
 
