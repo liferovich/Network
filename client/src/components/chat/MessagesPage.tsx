@@ -1,21 +1,30 @@
 import axios from 'axios';
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, useCallback } from 'react';
 import socket from '../../socket';
-import { Chat } from './Chat';
+import Chat from './Chat';
+
+type MessageType = {
+  userName: string;
+  text: string;
+};
+type UserType = {
+  id: string;
+  userName: string;
+};
 
 const MessagesPage: FC = () => {
   const [roomId, setRoomId] = useState('');
   const [userName, setUserName] = useState('');
   const [auth, setAuth] = useState(false);
 
-  const [users, setUsers] = useState([]);
-  const [messages, setMessages] = useState([]);
+  const [users, setUsers] = useState<Array<UserType>>([]);
+  const [messages, setMessages] = useState<Array<MessageType>>([]);
 
-  const signIn = async(e: React.FormEvent) => {
+  const signIn = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!roomId || !userName) return console.log('Error');
 
-    axios.post('http://localhost:5000/rooms', { roomId, userName }).then((res) => {
+    axios.post('http://localhost:5000/rooms', { roomId, userName }).then(() => {
       setAuth(true);
     });
 
@@ -24,14 +33,30 @@ const MessagesPage: FC = () => {
     setUsers(data.users);
   };
 
+  const addMessage = useCallback(
+    (newMessage: MessageType) => {
+      setMessages([...messages, newMessage]);
+    },
+    [messages]
+  );
+
   useEffect(() => {
-    socket.on('ROOM:SET_USERS', (users: string[])=>{
-      setUsers(users);
-    })
-  }, [])  
+    socket.on('ROOM:SET_USERS', (currentUsers: Array<UserType>) => {
+      setUsers([...currentUsers]);
+    });
+  }, []);
+
+  useEffect(() => {
+    socket.on(
+      'ROOM:ADD_MESSAGE',
+      (newMessage: { userName: string; text: string }) => {
+        addMessage(newMessage);
+      }
+    );
+  }, [messages, addMessage]);
 
   return (
-    <div>
+    <div className='MessagePage'>
       {!auth ? (
         <form onSubmit={signIn}>
           <input
@@ -50,7 +75,15 @@ const MessagesPage: FC = () => {
             Sign In
           </button>
         </form>
-      ): (<Chat users={users} messages={messages}/>)}
+      ) : (
+        <Chat
+          users={users}
+          messages={messages}
+          userName={userName}
+          roomId={roomId}
+          onAddMessage={addMessage}
+        />
+      )}
     </div>
   );
 };

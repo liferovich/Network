@@ -1,45 +1,81 @@
 .wrapper {
-    max-width: 40%;
-    margin: 100px auto;
-    min-width: 720px;
+  max-width: 40%;
+  margin: 100px auto;
+  min-width: 720px;
 }
 .join-block {
-    margin: 0 auto;
-    width: 300px;
+  margin: 0 auto;
+  width: 300px;
 }
 .join-block input {
-    font-size: 24px;
-    width: 100%;
-    height: 50px;
-    padding-bottom: 50px;
-    padding-left: 10px;
-    margin-bottom: 10px;
+  font-size: 24px;
+  width: 100%;
+  height: 50px;
+  padding-bottom: 50px;
+  padding-left: 10px;
+  margin-bottom: 10px;
 }
 .join-block button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    font-weight: bold;
-    cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  font-weight: bold;
+  cursor: pointer;
 }
 .chat {
-    display: flex;
-    height: 500px;
-    border: 1px solid rgba(159,183,197,0.1);
-    border-radius: 8px;
-    overflow: hidden;
+  display: flex;
+  height: calc(100vh - 114px - 2rem);
+  border: 1px solid rgba(159, 183, 197, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
 }
-.chat-users {
-    border-right: 1px solid rgba(159,183,197,0.1);
-    padding: 20px;
-    width: 200px;
-    background-color: #f6f9fa;
+.col.chat-users {
+  border-right: 1px solid rgba(159, 183, 197, 0.1);
+  padding: 20px;
+  background-color: #f6f9fa;
 }
 .messages {
-    flex: 1;
+  flex: 1 1;
+  height: calc(100% - 190px);
+  overflow: auto;
 }
 .message p {
-    display: inline-block;
-    border-radius: 10px;
-    border-top: 1px solid rgba(0,0,0,0.1);
+  display: inline-block;
+  border-radius: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.chat-users ul li {
+  background-color: #ffffff;
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.chat .message p {
+  padding: 12px 20px;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+.message-right {
+  text-align: right;
+}
+.message-author {
+  color: #b5b5b5;
+  font-weight: 400;
+}
+.col.chat-messages {
+  padding: 20px;
+  padding-bottom: 0;
+}
+.chat textarea.materialize-textarea {
+  max-height: 6rem;
+  overflow: auto;
+  line-height: 24px;
+  margin-bottom: 5px;
+}
+hr {
+  opacity: 0.5;
+}
+.chat .grey.lighten-2 {
+  color: #000000;
 }
