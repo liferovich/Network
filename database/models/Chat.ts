@@ -9,9 +9,9 @@ const Chat = sequelize.define('Chat', {
     primaryKey: true,
     autoIncrement: true,
   },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
+  members: {
+    type: DataTypes.ARRAY(DataTypes.INTEGER),
+    defaultValue: [],
   },
 });
 

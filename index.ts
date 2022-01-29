@@ -40,6 +40,7 @@ app.get('/rooms/:id', (req, res) => {
 
   res.json(obj);
 });
+
 app.post('/rooms', (req, res) => {
   const { roomId } = req.body;
   if (!rooms.has(roomId)) {
