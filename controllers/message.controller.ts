@@ -26,7 +26,6 @@ class MessageController {
       const sender = req.body.sender;
       const ChatId = req.body.ChatId;
       const text = req.body.text;
-      console.log(sender, ChatId, text);
       const message = await messageService.addMessage(
         Number(sender),
         Number(ChatId),

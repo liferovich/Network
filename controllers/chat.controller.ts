@@ -10,6 +10,7 @@ class ChatController {
     try {
       const id = req.params.id;
       const chats = await chatService.getChats(Number(id));
+      //profiles
 
       return res.json(chats);
     } catch (e) {
