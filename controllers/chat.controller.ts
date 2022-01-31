@@ -2,20 +2,6 @@ import express from 'express';
 import chatService from '../services/chat.service';
 import profileService from '../services/profile.service';
 
-// type ProfileType = {
-//   id: number;
-//   firstname: string;
-//   lastname: string;
-//   age: number;
-//   sex: string;
-//   avatar: string | null;
-//   email: string;
-//   phone: string;
-//   instagram: string | null;
-//   status: string | null;
-//   UserId: number;
-// };
-
 class ChatController {
   async getChats(
     req: express.Request,
@@ -35,7 +21,6 @@ class ChatController {
         })
       );
 
-      //profiles
       const profiles = await profileService.getProfilesByIds(members);
 
       return res.json({ chats, profiles });

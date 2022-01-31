@@ -1,6 +1,5 @@
 import { sequelize } from '../database.state';
 import pkg from 'sequelize';
-import Album from './Album';
 const { DataTypes } = pkg;
 
 const Photo = sequelize.define('Photo', {
@@ -10,16 +9,13 @@ const Photo = sequelize.define('Photo', {
     primaryKey: true,
     autoIncrement: true,
   },
-  path: {
+  name: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  album_id: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: Album,
-      key: 'id',
-    },
+  path: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
 });
 

@@ -4,7 +4,7 @@ export { default as Role } from './Role';
 
 export { default as Friend } from './Friend';
 
-export { default as Album } from './Album';
+// export { default as Album } from './Album';
 export { default as Photo } from './Photo';
 
 export { default as Post } from './Post';

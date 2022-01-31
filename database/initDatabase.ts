@@ -3,7 +3,7 @@ import {
   User,
   Role,
   Friend,
-  Album,
+  // Album,
   Photo,
   Post,
   Message,
@@ -30,12 +30,12 @@ Friend.belongsTo(User, {
   onDelete: 'cascade',
 });
 
-User.hasMany(Album);
-Album.belongsTo(User, {
-  onDelete: 'cascade',
-});
-Album.hasMany(Photo);
-Photo.belongsTo(Album);
+// User.hasMany(Album);
+// Album.belongsTo(User, {
+//   onDelete: 'cascade',
+// });
+// Album.hasMany(Photo);
+Photo.belongsTo(User);
 
 User.hasMany(Post);
 Post.belongsTo(User, {

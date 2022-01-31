@@ -6,6 +6,7 @@ import { userRouter } from './user';
 import { postRouter } from './post';
 import { chatRouter } from './chat';
 import { messageRouter } from './message';
+import { mediaRouter } from './media';
 
 export const router = Router();
 
@@ -16,3 +17,4 @@ router.use('/friends', friendRouter);
 router.use('/posts', postRouter);
 router.use('/chats', chatRouter);
 router.use('/messages', messageRouter);
+router.use('/media', mediaRouter);
