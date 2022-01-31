@@ -1,0 +1,130 @@
+.wrapper {
+  max-width: 40%;
+  margin: 100px auto;
+  min-width: 720px;
+}
+.join-block {
+  margin: 0 auto;
+  width: 300px;
+}
+.join-block input {
+  font-size: 24px;
+  width: 100%;
+  height: 50px;
+  padding-bottom: 50px;
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+.join-block button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.chat {
+  display: flex;
+  height: calc(100vh - 114px - 2rem);
+  border: 1px solid rgba(159, 183, 197, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.col.chat-users {
+  border-right: 1px solid rgba(159, 183, 197, 0.1);
+  padding: 20px;
+  background-color: #f6f9fa;
+}
+.messages {
+  flex: 1 1;
+  height: calc(100% - 200px);
+  overflow: auto;
+}
+.message p {
+  display: inline-block;
+  border-radius: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.chats {
+  margin-top: 10px;
+}
+.chat-users .chatUser {
+  background-color: #ffffff;
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+}
+.chat-users .chatUser.active {
+  border: 2px solid #26a69a;
+}
+.chat .message p {
+  padding: 12px 20px;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+.message-right {
+  text-align: right;
+}
+.message-author {
+  color: #b5b5b5;
+  font-weight: 400;
+}
+.col.chat-messages {
+  padding: 20px;
+  padding-bottom: 0;
+}
+.chat textarea.materialize-textarea {
+  max-height: 6rem;
+  overflow: auto;
+  line-height: 24px;
+  margin-bottom: 5px;
+}
+hr {
+  opacity: 0.5;
+}
+.chat .grey.lighten-2 {
+  color: #000000;
+}
+.choose {
+  font-weight: 800;
+  color: #bebebe;
+  margin-top: 1rem;
+  letter-spacing: 0.2rem;
+}
+.chatImg .user-status img {
+  width: 35px;
+  height: 35px;
+}
+.chatImg .user-status {
+  position: absolute;
+  bottom: -12px;
+  left: 12px;
+}
+.chatForm {
+  padding: 20px 0;
+}
+.btn-sendmess {
+  width: 120px;
+  height: 40px;
+}
+.chatForm form {
+  display: flex;
+  align-items: flex-end;
+  margin-left: 2rem;
+}
+.chatForm form textarea {
+  margin-right: 3rem;
+}
+.chatForm .user-img {
+  width: 100px;
+}
+.no-messages {
+  color: #b5b5b5;
+  font-weight: 400;
+  margin: 0;
+}
+.mb-1 {
+  margin-bottom: 1rem;
+}

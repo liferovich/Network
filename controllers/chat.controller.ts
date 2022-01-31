@@ -1,5 +1,20 @@
 import express from 'express';
 import chatService from '../services/chat.service';
+import profileService from '../services/profile.service';
+
+// type ProfileType = {
+//   id: number;
+//   firstname: string;
+//   lastname: string;
+//   age: number;
+//   sex: string;
+//   avatar: string | null;
+//   email: string;
+//   phone: string;
+//   instagram: string | null;
+//   status: string | null;
+//   UserId: number;
+// };
 
 class ChatController {
   async getChats(
@@ -10,9 +25,20 @@ class ChatController {
     try {
       const id = req.params.id;
       const chats = await chatService.getChats(Number(id));
-      //profiles
 
-      return res.json(chats);
+      let members: number[] = [];
+      chats.forEach((chat) =>
+        JSON.parse(JSON.stringify(chat)).members.forEach((member: number) => {
+          if (!members.includes(member) && member !== Number(id)) {
+            members.push(member);
+          }
+        })
+      );
+
+      //profiles
+      const profiles = await profileService.getProfilesByIds(members);
+
+      return res.json({ chats, profiles });
     } catch (e) {
       next(e);
     }

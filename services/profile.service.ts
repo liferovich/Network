@@ -44,6 +44,20 @@ class ProfileService {
     return profiles;
   }
 
+  async getProfilesByIds(ids: Array<number>) {
+    const profiles = await sequelize.model('Profile').findAll({
+      where: {
+        UserId: ids,
+      },
+    });
+
+    if (!profiles) {
+      throw new Error('Crashed creating profile');
+    }
+
+    return profiles;
+  }
+
   async editProfile(id: string, profile: ProfileType) {
     const updatedProfile = await sequelize.model('Profile').update(profile, {
       where: {

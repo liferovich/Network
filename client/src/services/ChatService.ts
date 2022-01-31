@@ -1,10 +1,10 @@
 import { AxiosResponse } from 'axios';
 import api from '../http';
-import { ChatResponse, MessageResponse } from '../models/response/ChatResponse';
+import { ChatResponse, ChatResponse2, MessageResponse } from '../models/response/ChatResponse';
 
 export default class ChatService {
-  static async getChats(id: number): Promise<AxiosResponse<Array<ChatResponse>>> {
-    return api.get<Array<ChatResponse>>(`/chats/${id}`);
+  static async getChats(id: number): Promise<AxiosResponse<ChatResponse2>> {
+    return api.get<ChatResponse2>(`/chats/${id}`);
   }
 
   static async addChat(senderId: number, receiverId: number): Promise<AxiosResponse<ChatResponse>> {
