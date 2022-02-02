@@ -1,18 +1,6 @@
-// import axios from 'axios';
 import { FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { photos, addPhoto } from '../../features/GallerySlice';
-
-// type PhotoType = {
-//   fieldname: string;
-//   originalname: string;
-//   encoding: string;
-//   mimetype: string;
-//   destination: string;
-//   filename: string;
-//   path: string;
-//   size: number;
-// };
 
 const Media = () => {
   const dispatch = useDispatch();

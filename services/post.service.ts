@@ -49,7 +49,7 @@ class PostService {
     );
 
     if (!updatedPost) {
-      throw new Error('Crashed editing post');
+      throw { status: 500, message: 'Crashed editing post' };
     }
 
     return updatedPost;
@@ -66,7 +66,7 @@ class PostService {
     });
 
     if (!likes) {
-      throw new Error('Crashed getting likes');
+      throw { status: 500, message: 'Crashed getting likes' };
     }
 
     return likes;
@@ -86,7 +86,7 @@ class PostService {
     );
 
     if (!updatedPost) {
-      throw new Error('Crashed editing likes');
+      throw { status: 500, message: 'Crashed editing likes' };
     }
 
     return updatedPost;
@@ -110,7 +110,7 @@ class PostService {
     );
 
     if (!updatedPost) {
-      throw new Error('Crashed editing likes');
+      throw { status: 500, message: 'Crashed editing likes' };
     }
 
     return updatedPost;
@@ -124,7 +124,7 @@ class PostService {
     });
 
     if (!post) {
-      throw new Error('Crashed deleting post');
+      throw { status: 500, message: 'Crashed deleting post' };
     }
 
     return post;
@@ -141,7 +141,7 @@ class PostService {
     });
 
     if (!profiles) {
-      throw new Error('Crashed getting profiles');
+      throw { status: 500, message: 'Crashed getting profiles' };
     }
 
     return profiles;

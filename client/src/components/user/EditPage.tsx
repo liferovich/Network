@@ -17,17 +17,6 @@ const EditPage: FC = () => {
   const dispatch = useDispatch();
   const history = useNavigate();
 
-  // const avatarHandle = (e: any) => {
-  //   setEditedUserProfile({
-  //     ...editedUserProfile,
-  //     avatar: e.target.files[0],
-  //   });
-  //   const fd = new FormData();
-  //   fd.append('image', e.target.files[0], e.target.files[0].name);
-  //   axios.post('http://localhost:5000/profile/avatar', fd)
-  //   .then(res => console.log(res))
-  // };
-
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEditedUserProfile({
       ...editedUserProfile,
@@ -45,7 +34,6 @@ const EditPage: FC = () => {
     e.preventDefault();
     dispatch(deleteProfile(editedUserProfile.UserId));
     dispatch(deleteUser(editedUserProfile.UserId));
-    // history('/login');
   };
 
   if (loading) {

@@ -3,7 +3,6 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { router } from './routes/index';
 import { initDatabase } from './database/initDatabase';
-// import { errorMiddleware } from './middlewares/error.middleware';
 
 import initSockets from './sockets';
 import dotenv from 'dotenv';
@@ -23,7 +22,6 @@ app.use(
   })
 );
 app.use('/api', router);
-// app.use(errorMiddleware);
 
 initSockets();
 

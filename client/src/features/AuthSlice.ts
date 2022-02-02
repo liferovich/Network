@@ -5,10 +5,17 @@ import { IUser } from '../models/IUser';
 import { AuthResponse } from '../models/response/AuthResponse';
 import AuthService from '../services/AuthService';
 
+// type ErrorType = {
+//   error: {
+//     message: string;
+//   };
+// };
+
 const initialState = {
   user: {},
   isAuth: false,
   isLoading: false,
+  error: {} as any,
   id: 0,
 };
 
@@ -23,7 +30,7 @@ export const login = createAsyncThunk(
 
       return response.data;
     } catch (err: any) {
-      return rejectWithValue(err.response?.data?.message);
+      return rejectWithValue(err.response.data);
     }
   }
 );
@@ -39,7 +46,7 @@ export const register = createAsyncThunk(
 
       return response.data;
     } catch (err: any) {
-      return rejectWithValue(err.response?.data?.message);
+      return rejectWithValue(err.response.data);
     }
   }
 );
@@ -52,7 +59,7 @@ export const logout = createAsyncThunk(
 
       return;
     } catch (err: any) {
-      return rejectWithValue(err.response?.data?.message);
+      return rejectWithValue(err.response.data);
     }
   }
 );
@@ -69,7 +76,7 @@ export const checkAuth = createAsyncThunk(
 
       return response.data;
     } catch (err: any) {
-      return rejectWithValue(err.response?.data?.message);
+      return rejectWithValue(err.response.data);
     } finally {
       setLoading(false);
     }
@@ -85,7 +92,7 @@ export const deleteUser = createAsyncThunk(
 
       return;
     } catch (err: any) {
-      return rejectWithValue(err.response?.data?.message);
+      return rejectWithValue(err.response.data);
     } finally {
       setLoading(false);
     }
@@ -105,6 +112,9 @@ const authSlice = createSlice({
     setLoading: (state, action) => {
       state.isLoading = action.payload;
     },
+    clearError: (state, action) => {
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
@@ -115,6 +125,7 @@ const authSlice = createSlice({
     });
     builder.addCase(login.rejected, (state, action) => {
       console.log(action.payload);
+      state.error = JSON.parse(JSON.stringify(action.payload));
     });
     builder.addCase(register.fulfilled, (state, action) => {
       localStorage.setItem('token', action.payload.accessToken);
@@ -124,6 +135,7 @@ const authSlice = createSlice({
     });
     builder.addCase(register.rejected, (state, action) => {
       console.log(action.payload);
+      state.error = JSON.parse(JSON.stringify(action.payload));
     });
     builder.addCase(logout.fulfilled, (state, action) => {
       localStorage.removeItem('token');
@@ -133,6 +145,7 @@ const authSlice = createSlice({
     });
     builder.addCase(logout.rejected, (state, action) => {
       console.log(action.payload);
+      state.error = JSON.parse(JSON.stringify(action.payload));
     });
     builder.addCase(checkAuth.fulfilled, (state, action) => {
       localStorage.setItem('token', action.payload.accessToken);
@@ -142,6 +155,7 @@ const authSlice = createSlice({
     });
     builder.addCase(checkAuth.rejected, (state, action) => {
       console.log(action.payload);
+      state.error = JSON.parse(JSON.stringify(action.payload));
     });
     builder.addCase(deleteUser.fulfilled, (state, action) => {
       localStorage.removeItem('token');
@@ -151,13 +165,15 @@ const authSlice = createSlice({
     });
     builder.addCase(deleteUser.rejected, (state, action) => {
       console.log(action.payload);
+      state.error = JSON.parse(JSON.stringify(action.payload));
     });
   },
 });
 
-export const { setUser, setAuth, setLoading } = authSlice.actions;
+export const { setUser, setAuth, setLoading, clearError } = authSlice.actions;
 export const isAuth = (state: any) => state.user.isAuth; //ANYYYYY
 export const isLoading = (state: any) => state.user.isLoading; //ANYYYYY
 export const isActivated = (state: any) => state.user.user.isActivated; //ANYYYYY
 export const id = (state: any) => state.user.id; //ANYYYYY
+export const error = (state: any) => state.user.error;
 export default authSlice.reducer;

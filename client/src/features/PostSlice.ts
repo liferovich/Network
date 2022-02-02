@@ -176,7 +176,7 @@ const postSlice = createSlice({
 });
 
 export const { setLoading } = postSlice.actions;
-export const posts = (state: any) => state.posts.posts; //ANYYYYY
-export const profiles = (state: any) => state.posts.profiles; //ANYYYYY
-export const isLoading = (state: any) => state.posts.isLoading; //ANYYYYY
+export const posts = (state: any) => state.posts.posts;
+export const profiles = (state: any) => state.posts.profiles;
+export const isLoading = (state: any) => state.posts.isLoading;
 export default postSlice.reducer;

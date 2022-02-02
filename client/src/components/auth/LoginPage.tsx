@@ -1,20 +1,39 @@
-import { FC, useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { login, register, checkAuth } from '../../features/AuthSlice';
+import React, { FC, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  login,
+  register,
+  checkAuth,
+  error,
+} from '../../features/AuthSlice';
+import { useMessage } from '../../hook/message.hook';
 
 const LoginPage: FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const dispatch = useDispatch();
+  const userError = useSelector(error);
+  const message = useMessage();
 
   const handleLogin = (e: React.FormEvent) => {
     dispatch(login({ email, password }));
     e.preventDefault();
   };
 
-  const handleRegister = () => {
+  const handleRegister = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
     dispatch(register({ email, password }));
   };
+
+  useEffect(() => {
+    if (userError.hasOwnProperty('error')) {
+      message(userError.error.message);
+    }
+  }, [message, userError]);
+
+  useEffect(() => {
+    window.M.updateTextFields();
+  }, []);
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -26,7 +45,7 @@ const LoginPage: FC = () => {
     <div className='row'>
       <div className='col s6 offset-s3'>
         <h1>Authorization</h1>
-        <form className='loginForm card blue darken-1' onSubmit={handleLogin}>
+        <form className='loginForm card blue darken-1'>
           <div className='card-content white-text'>
             <div>
               <div className='input-field'>
@@ -39,7 +58,9 @@ const LoginPage: FC = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                 />
-                <label className='active' htmlFor='email'>Email</label>
+                <label className='active' htmlFor='email'>
+                  Email
+                </label>
               </div>
               <div className='input-field'>
                 <input
@@ -51,7 +72,9 @@ const LoginPage: FC = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                 />
-                <label className='active' htmlFor='password'>Password</label>
+                <label className='active' htmlFor='password'>
+                  Password
+                </label>
               </div>
             </div>
           </div>

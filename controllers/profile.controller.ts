@@ -2,26 +2,22 @@ import express from 'express';
 import profileService from '../services/profile.service';
 
 class ProfileController {
-  async getProfile(
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) {
+  async getProfile(req: express.Request, res: express.Response) {
     try {
       const id = req.params.id;
       const profile = await profileService.getProfile(id);
 
       return res.json(profile);
-    } catch (e) {
-      next(e);
+    } catch (err: any) {
+      if (err.status) {
+        res.status(err.status).json({ error: { message: err.message } });
+      } else {
+        res.status(500).json({ error: { message: 'Server error..' } });
+      }
     }
   }
 
-  async getProfiles(
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) {
+  async getProfiles(req: express.Request, res: express.Response) {
     try {
       const userId = req.body.userId;
       const friendsIds = req.body.friendsIds;
@@ -29,32 +25,32 @@ class ProfileController {
       const profiles = await profileService.getProfiles(friendsIds);
 
       return res.json(profiles);
-    } catch (e) {
-      next(e);
+    } catch (err: any) {
+      if (err.status) {
+        res.status(err.status).json({ error: { message: err.message } });
+      } else {
+        res.status(500).json({ error: { message: 'Server error..' } });
+      }
     }
   }
 
-  async editProfile(
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) {
+  async editProfile(req: express.Request, res: express.Response) {
     try {
       const id = req.body.profile.id;
       const profile = req.body.profile;
       const response = await profileService.editProfile(id, profile);
 
       return res.json(response);
-    } catch (e) {
-      next(e);
+    } catch (err: any) {
+      if (err.status) {
+        res.status(err.status).json({ error: { message: err.message } });
+      } else {
+        res.status(500).json({ error: { message: 'Server error..' } });
+      }
     }
   }
 
-  async deleteProfile(
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) {
+  async deleteProfile(req: express.Request, res: express.Response) {
     try {
       const id = req.params.id;
 
@@ -70,35 +66,14 @@ class ProfileController {
         .catch(function (error) {
           res.json(error);
         });
-    } catch (e) {
-      next(e);
+    } catch (err: any) {
+      if (err.status) {
+        res.status(err.status).json({ error: { message: err.message } });
+      } else {
+        res.status(500).json({ error: { message: 'Server error..' } });
+      }
     }
   }
-
-  // async editAvatar(
-  //   req: express.Request,
-  //   res: express.Response,
-  //   next: express.NextFunction
-  // ) {
-  //   try {
-  //     const id = req.params.id;
-
-  //     await profileService
-  //       .deleteUser(Number(id))
-  //       .then(function (deletedRecord) {
-  //         if (deletedRecord === 1) {
-  //           res.status(200).json({ message: 'Deleted successfully' });
-  //         } else {
-  //           res.status(404).json({ message: 'record not found' });
-  //         }
-  //       })
-  //       .catch(function (error) {
-  //         res.status(500).json(error);
-  //       });
-  //   } catch (e) {
-  //     next(e);
-  //   }
-  // }
 }
 
 export default new ProfileController();

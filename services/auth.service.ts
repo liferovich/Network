@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { default as mailService } from './mail.service';
 import { default as tokenService } from './token.service';
 import { UserDto } from '../dto/user.dto';
-import { ApiError } from '../exceptions/api.error';
 
 class AuthService {
   async register(email: string, password: string) {
@@ -15,7 +14,7 @@ class AuthService {
     });
 
     if (candidate) {
-      throw ApiError.BadRequest(`The user with the email ${email} exists`);
+      throw { status: 400, message: `The user with this email exists` };
     }
 
     const hashPassword = await bcrypt.hash(password, 3);
@@ -42,12 +41,6 @@ class AuthService {
     await sequelize.model('Friend').create({
       UserId: user.id,
     });
-    await sequelize.model('Post').create({
-      UserId: user.id,
-    });
-    await sequelize.model('Album').create({
-      UserId: user.id,
-    });
 
     return {
       ...tokens,
@@ -63,7 +56,7 @@ class AuthService {
     });
 
     if (!user) {
-      throw ApiError.BadRequest('Incorrect activation link');
+      throw { status: 400, message: 'Incorrect activation link' };
     }
 
     await sequelize
@@ -81,13 +74,13 @@ class AuthService {
     )?.get({ plain: true });
 
     if (!user) {
-      throw ApiError.BadRequest('User with this email doesn`t exist');
+      throw { status: 404, message: 'User with this email doesn`t exist' };
     }
 
     const isPassEquels = await bcrypt.compare(password, user.password);
 
     if (!isPassEquels) {
-      throw ApiError.BadRequest('Invalid password');
+      throw { status: 400, message: 'Invalid password' };
     }
 
     const userDto = new UserDto(user);
@@ -108,7 +101,7 @@ class AuthService {
 
   async refresh(refreshToken: string) {
     if (!refreshToken) {
-      throw ApiError.UnathorizedError();
+      throw { status: 401, message: 'Unathorized user' };
     }
 
     const userData = tokenService.validateRefreshToken(refreshToken);
@@ -116,8 +109,9 @@ class AuthService {
     const tokenFromDb = await tokenService.findToken(refreshToken);
 
     if (!userData || !tokenFromDb) {
-      throw ApiError.UnathorizedError();
+      throw { status: 401, message: 'Unathorized user' };
     }
+
     const user = (
       await sequelize.model('User').findOne({
         where: {

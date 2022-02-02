@@ -24,7 +24,7 @@ class ProfileService {
     });
 
     if (!profile) {
-      throw new Error('Crashed creating profile');
+      throw { status: 500, message: 'Crashed creating profile' };
     }
 
     return profile;
@@ -38,7 +38,7 @@ class ProfileService {
     });
 
     if (!profiles) {
-      throw new Error('Crashed creating profile');
+      throw { status: 500, message: 'Crashed creating profile' };
     }
 
     return profiles;
@@ -52,7 +52,7 @@ class ProfileService {
     });
 
     if (!profiles) {
-      throw new Error('Crashed creating profile');
+      throw { status: 500, message: 'Crashed creating profile' };
     }
 
     return profiles;
@@ -67,8 +67,7 @@ class ProfileService {
     });
 
     if (!updatedProfile) {
-      console.log('Crashed editing profile');
-      throw new Error('Crashed editing profile');
+      throw { status: 500, message: 'Crashed editing profile' };
     }
 
     const data = updatedProfile[1][0].get();
@@ -96,7 +95,7 @@ class ProfileService {
     });
 
     if (!user) {
-      throw new Error('Crashed deleting user');
+      throw { status: 500, message: 'Crashed deleting user' };
     }
 
     return user;

@@ -47,11 +47,9 @@ class FriendService {
       );
 
     if (!friends) {
-      throw new Error('Crashed deleting friends');
+      throw { status: 500, message: 'Crashed deleting friends' };
     }
-
     const data = friends[1][0].get();
-
     return data.friends;
   }
 }

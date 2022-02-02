@@ -127,8 +127,6 @@ p.count,
   margin-top: 6px;
 }
 .addition-info {
-  /* display: flex;
-  justify-content: space-between; */
   border-top: 1px solid #eceff1;
   padding-top: 15px;
   margin: 0 5px;
@@ -154,13 +152,6 @@ p.count,
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
-}
-.tabs-show .tab-3 {
-  /* background-image: url(../img/grid.png); */
-  margin-right: 3px;
-}
-.tabs-show .tab-1 {
-  /* background-image: url(../img/list.png); */
 }
 
 .friends-top,

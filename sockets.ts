@@ -58,33 +58,6 @@ const initSockets = () => {
       io.emit('getUsers', users);
     });
   });
-
-  // io.on('connection', (socket) => {
-  //   socket.on('ROOM:JOIN', ({ roomId, userName }) => {
-  //     socket.join(roomId);
-  //     rooms.get(roomId).get('users').push({ id: socket.id, userName });
-  //     const users = rooms.get(roomId).get('users');
-  //     socket.broadcast.to(roomId).emit('ROOM:SET_USERS', users);
-  //   });
-
-  //   socket.on('disconnected', () => {
-  //     rooms.forEach((value, roomId) => {
-  //       const index = value.get('users').indexOf(socket.id);
-  //       if (index > -1) {
-  //         value.get('users').slice(index, 1);
-  //         const users = rooms.get(roomId).get('users');
-  //         socket.broadcast.to(roomId).emit('ROOM:SET_USERS', users);
-  //       }
-  //     });
-  //   });
-
-  //   console.log('User connected ', socket.id);
-  // });
-
-  // server.listen(5000, async () => {
-  //   console.log(`Server started on PORT = ${PORT}`);
-  //   await initDatabase();
-  // });
 };
 
 export default initSockets;

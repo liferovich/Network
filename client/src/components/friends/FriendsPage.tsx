@@ -36,8 +36,8 @@ const FriendsPage: FC = () => {
   const userFriendsIds = useSelector(friendsIds);
   const allUsers = useSelector(users);
   const loading = useSelector(isLoading);
-  const quantity = userFriends.length || 0;
-  const quantityUsers = allUsers.length || 0;
+  const quantity = userFriends?.length || 0;
+  const quantityUsers = allUsers?.length || 0;
 
   useEffect(() => {
     dispatch(getFriends(userId));
@@ -67,9 +67,6 @@ const FriendsPage: FC = () => {
               <div className='tab active'>
                 <p>Search users</p>
               </div>
-              {/* <div className='tab'>
-                <p>Advanced search</p>
-              </div> */}
             </div>
             <form className='form-search' method='post'>
               <div className='form-inner'>
@@ -153,8 +150,8 @@ const FriendsPage: FC = () => {
             <div className='row'>
               {allUsers?.map((user: FriendType) => {
                 return (
-                  <div className='friend-block col m4 s12'>
-                    <div className='friend' key={user.id}>
+                  <div className='friend-block col m4 s12' key={user.id}>
+                    <div className='friend'>
                       <div className='friend-photo'>
                         <img
                           src={user.avatar ? user.avatar : './img/no_user.png'}

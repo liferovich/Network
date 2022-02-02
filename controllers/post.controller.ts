@@ -2,11 +2,7 @@ import express from 'express';
 import postService from '../services/post.service';
 
 class PostController {
-  async getPosts(
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) {
+  async getPosts(req: express.Request, res: express.Response) {
     try {
       const { posts, usersIds } = await postService.getPosts();
       const profiles = await postService.getProfiles(
@@ -14,16 +10,16 @@ class PostController {
       );
 
       return res.json({ posts, profiles });
-    } catch (e) {
-      next(e);
+    } catch (err: any) {
+      if (err.status) {
+        res.status(err.status).json({ error: { message: err.message } });
+      } else {
+        res.status(500).json({ error: { message: 'Server error..' } });
+      }
     }
   }
 
-  async addPost(
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) {
+  async addPost(req: express.Request, res: express.Response) {
     try {
       const id = req.body.userId;
       const text = req.body.text;
@@ -34,16 +30,16 @@ class PostController {
       );
 
       return res.json({ posts, profiles });
-    } catch (e) {
-      next(e);
+    } catch (err: any) {
+      if (err.status) {
+        res.status(err.status).json({ error: { message: err.message } });
+      } else {
+        res.status(500).json({ error: { message: 'Server error..' } });
+      }
     }
   }
 
-  async editPost(
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) {
+  async editPost(req: express.Request, res: express.Response) {
     try {
       const id = req.body.id;
       const text = req.body.text;
@@ -54,16 +50,16 @@ class PostController {
       );
 
       return res.json({ posts, profiles });
-    } catch (e) {
-      next(e);
+    } catch (err: any) {
+      if (err.status) {
+        res.status(err.status).json({ error: { message: err.message } });
+      } else {
+        res.status(500).json({ error: { message: 'Server error..' } });
+      }
     }
   }
 
-  async addLike(
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) {
+  async addLike(req: express.Request, res: express.Response) {
     try {
       const userId = req.body.userId;
       const id = req.body.id;
@@ -86,16 +82,16 @@ class PostController {
       );
 
       return res.json({ posts, profiles });
-    } catch (e) {
-      next(e);
+    } catch (err: any) {
+      if (err.status) {
+        res.status(err.status).json({ error: { message: err.message } });
+      } else {
+        res.status(500).json({ error: { message: 'Server error..' } });
+      }
     }
   }
 
-  async addComment(
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) {
+  async addComment(req: express.Request, res: express.Response) {
     try {
       const comment = req.body.comment;
       const id = req.body.id;
@@ -108,16 +104,16 @@ class PostController {
       );
 
       return res.json({ posts, profiles });
-    } catch (e) {
-      next(e);
+    } catch (err: any) {
+      if (err.status) {
+        res.status(err.status).json({ error: { message: err.message } });
+      } else {
+        res.status(500).json({ error: { message: 'Server error..' } });
+      }
     }
   }
 
-  async deletePost(
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) {
+  async deletePost(req: express.Request, res: express.Response) {
     try {
       const id = req.params.id;
       await postService.deletePost(Number(id));
@@ -127,8 +123,12 @@ class PostController {
       );
 
       return res.json({ posts, profiles });
-    } catch (e) {
-      next(e);
+    } catch (err: any) {
+      if (err.status) {
+        res.status(err.status).json({ error: { message: err.message } });
+      } else {
+        res.status(500).json({ error: { message: 'Server error..' } });
+      }
     }
   }
 }

@@ -8,7 +8,7 @@ class UserController {
     next: express.NextFunction
   ) {
     try {
-      // const users await authService.activate(activationLink);
+      // const users = await authService.activate(activationLink);
       return res.redirect(process.env.CLIENT_URL || '');
     } catch (e) {
       next(e);
