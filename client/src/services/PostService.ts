@@ -15,6 +15,14 @@ export default class PostService {
     return api.put<PostResponse2>(`/posts/`, { id, text });
   }
 
+  static async addLike(id: number, userId: number): Promise<AxiosResponse<PostResponse2>> {
+    return api.put<PostResponse2>(`/posts/likes`, { id, userId });
+  }
+
+  static async addComment(id: number, comment: string): Promise<AxiosResponse<PostResponse2>> {
+    return api.put<PostResponse2>(`/posts/comment`, { id, comment });
+  }
+
   static async deletePost(id: number): Promise<AxiosResponse<PostResponse2>> {
     return api.delete<PostResponse2>(`/posts/${id}`);
   }

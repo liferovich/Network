@@ -1,24 +1,7 @@
 import express from 'express';
 import mediaService from '../services/media.service';
-import multer from 'multer';
-import path from 'path';
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, '/public/uploads');
-  },
-  filename: (req, file, cb) => {
-    cb(
-      null,
-      file.fieldname + '-' + Date.now() + path.extname(file.originalname)
-    );
-  },
-});
-
-const upload = multer({ storage: storage });
-const cpUpload = upload.fields
-
-class ChatController {
+class MediaController {
   async getChats(
     req: express.Request,
     res: express.Response,
@@ -40,22 +23,20 @@ class ChatController {
     next: express.NextFunction
   ) {
     try {
-      const file = req.files.file;
-      file.mv(`${__dirname}/client/public/uploads/${file.name}`, (err: any) => {
-        if (err) {
-          console.log(err);
-          return res.status(500).send(err);
-        }
-      });
+      const files = req.files;
+      if (files) {
+        await mediaService.addPhoto(
+          JSON.parse(JSON.stringify(files)).avatar[0].filename,
+          JSON.parse(JSON.stringify(files)).avatar[0].path
+        );
+        // console.log(JSON.parse(JSON.stringify(files)).avatar[0].path);
+      }
 
-      return res.json({
-        fileName: file.name,
-        filePath: `/uploads/${file.name}`,
-      });
+      return res.json({ files });
     } catch (e) {
       next(e);
     }
   }
 }
 
-export default new ChatController();
+export default new MediaController();

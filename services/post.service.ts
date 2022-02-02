@@ -55,6 +55,67 @@ class PostService {
     return updatedPost;
   }
 
+  async getLikes(id: number) {
+    const likes = await sequelize.model('Post').findOne({
+      where: {
+        id,
+      },
+      attributes: ['likes'],
+      raw: true,
+      nest: true,
+    });
+
+    if (!likes) {
+      throw new Error('Crashed getting likes');
+    }
+
+    return likes;
+  }
+
+  async addLike(likes: number[], id: number) {
+    const updatedPost = await sequelize.model('Post').update(
+      {
+        likes: likes,
+      },
+      {
+        where: {
+          id,
+        },
+        returning: true,
+      }
+    );
+
+    if (!updatedPost) {
+      throw new Error('Crashed editing likes');
+    }
+
+    return updatedPost;
+  }
+
+  async addComment(comment: string, id: number) {
+    const updatedPost = await sequelize.model('Post').update(
+      {
+        comments: sequelize.fn(
+          'array_append',
+          sequelize.col('comments'),
+          comment
+        ),
+      },
+      {
+        where: {
+          id,
+        },
+        returning: true,
+      }
+    );
+
+    if (!updatedPost) {
+      throw new Error('Crashed editing likes');
+    }
+
+    return updatedPost;
+  }
+
   async deletePost(id: number) {
     const post = await sequelize.model('Post').destroy({
       where: {

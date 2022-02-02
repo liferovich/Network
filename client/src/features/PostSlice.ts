@@ -61,6 +61,44 @@ export const editPost = createAsyncThunk(
   }
 );
 
+export const addLike = createAsyncThunk(
+  'post/addlike',
+  async (
+    { id, userId }: { id: number, userId: number },
+    { rejectWithValue }
+  ) => {
+    setLoading(true);
+    try {
+      const response = await PostService.addLike(id, userId);
+
+      return response.data;
+    } catch (err: any) {
+      return rejectWithValue(err.response?.data?.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+);
+
+export const addComment = createAsyncThunk(
+  'post/addcomment',
+  async (
+    { id, comment }: { id: number, comment: string },
+    { rejectWithValue }
+  ) => {
+    setLoading(true);
+    try {
+      const response = await PostService.addComment(id, comment);
+
+      return response.data;
+    } catch (err: any) {
+      return rejectWithValue(err.response?.data?.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+);
+
 export const deletePost = createAsyncThunk(
   'post/deletepost',
   async (
@@ -118,6 +156,20 @@ const postSlice = createSlice({
       state.profiles = action.payload.profiles;
     });
     builder.addCase(deletePost.rejected, (state, action) => {
+      console.log(action.payload);
+    });
+    builder.addCase(addLike.fulfilled, (state, action) => {
+      state.posts = action.payload.posts;
+      state.profiles = action.payload.profiles;
+    });
+    builder.addCase(addLike.rejected, (state, action) => {
+      console.log(action.payload);
+    });
+    builder.addCase(addComment.fulfilled, (state, action) => {
+      state.posts = action.payload.posts;
+      state.profiles = action.payload.profiles;
+    });
+    builder.addCase(addComment.rejected, (state, action) => {
       console.log(action.payload);
     });
   },

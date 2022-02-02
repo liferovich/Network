@@ -59,6 +59,60 @@ class PostController {
     }
   }
 
+  async addLike(
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) {
+    try {
+      const userId = req.body.userId;
+      const id = req.body.id;
+      const oldLikes = await postService.getLikes(Number(id));
+      const likesArr = JSON.parse(JSON.stringify(oldLikes)).likes;
+      const index = likesArr.indexOf(userId);
+
+      if (index > -1) {
+        likesArr.splice(index, 1);
+      } else {
+        likesArr.push(userId);
+      }
+
+      await postService.addLike(likesArr, Number(id));
+
+      const { posts, usersIds } = await postService.getPosts();
+
+      const profiles = await postService.getProfiles(
+        JSON.parse(JSON.stringify(usersIds))
+      );
+
+      return res.json({ posts, profiles });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async addComment(
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) {
+    try {
+      const comment = req.body.comment;
+      const id = req.body.id;
+      await postService.addComment(comment, Number(id));
+
+      const { posts, usersIds } = await postService.getPosts();
+
+      const profiles = await postService.getProfiles(
+        JSON.parse(JSON.stringify(usersIds))
+      );
+
+      return res.json({ posts, profiles });
+    } catch (e) {
+      next(e);
+    }
+  }
+
   async deletePost(
     req: express.Request,
     res: express.Response,

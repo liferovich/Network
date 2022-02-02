@@ -16,12 +16,13 @@ class MediaService {
     return chats;
   }
 
-  async addPhoto(members: Array<number>) {
-    const newPhoto = sequelize.model('Photo').create({
-      members,
+  async addPhoto(name: string, path: string) {
+    sequelize.model('Photo').create({
+      name,
+      path,
     });
 
-    return newPhoto;
+    return;
   }
 }
 

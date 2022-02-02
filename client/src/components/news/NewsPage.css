@@ -68,11 +68,27 @@ img {
 }
 .likes-block {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 .likes {
   cursor: pointer;
+  margin-left: 10px;
 }
 .likes i {
   color: #c62828;
+}
+.edit-post button {
+  cursor: pointer;
+}
+.comment-form textarea.materialize-textarea {
+  min-height: 3rem;
+}
+.comment {
+  padding: 0.75rem;
+  border-top: 1px solid #d1cccc;
+}
+.comment-title {
+  margin: 0.5rem 0;
+  color: grey;
+  font-size: 14px;
 }

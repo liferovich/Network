@@ -4,6 +4,7 @@ import { default as profileReducer } from '../features/ProfileSlice';
 import { default as friendsReducer } from '../features/FriendsSlice';
 import { default as postReducer } from '../features/PostSlice';
 import { default as chatReducer } from '../features/ChatSlice';
+import { default as galleryReducer } from '../features/GallerySlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
     profile: profileReducer,
     friends: friendsReducer,
     posts: postReducer,
-    chats: chatReducer
+    chats: chatReducer,
+    gallery: galleryReducer,
   },
 });
 

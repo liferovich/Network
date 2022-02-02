@@ -17,6 +17,14 @@ const Post = sequelize.define('Post', {
     type: DataTypes.DATE,
     defaultValue: sequelize.fn('now'),
   },
+  likes: {
+    type: DataTypes.ARRAY(DataTypes.INTEGER),
+    defaultValue: [],
+  },
+  comments: {
+    type: DataTypes.ARRAY(DataTypes.STRING),
+    defaultValue: [],
+  },
 });
 
 export default Post;

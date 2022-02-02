@@ -41,6 +41,9 @@ export const Header = ({
               <NavLink to='/messages'>Messages</NavLink>
             </li>
             <li>
+              <NavLink to='/gallery'>Gallery</NavLink>
+            </li>
+            <li>
               <p onClick={logoutHandler}>Logout</p>
             </li>
           </ul>

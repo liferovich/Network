@@ -7,8 +7,10 @@ import {
   addPost,
   editPost,
   deletePost,
+  addLike,
   posts,
   profiles,
+  addComment,
 } from '../../features/PostSlice';
 import { PostResponse } from '../../models/response/PostResponse';
 import './NewsPage.css';
@@ -21,6 +23,7 @@ const NewsPage: FC = () => {
   const userId = useSelector(id);
   const allPosts = useSelector(posts);
   const usersProfiles = useSelector(profiles);
+  const [comment, setComment] = useState('');
 
   const addNewPost = (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,6 +50,18 @@ const NewsPage: FC = () => {
   const cancelPost = () => {
     setText('');
     setEditedPost(0);
+  };
+
+  const addUserLike = (id: number, userId: number) => {
+    dispatch(addLike({ id, userId }));
+  };
+
+  const addUserComment = (e: React.FormEvent, id: number) => {
+    e.preventDefault();
+    if (comment) {
+      dispatch(addComment({ id, comment }));
+      setComment('');
+    }
   };
 
   useEffect(() => {
@@ -196,10 +211,54 @@ const NewsPage: FC = () => {
                           Posted on {String(post.date).slice(0, 10)}
                         </p>
                         <div className='likes-block'>
-                          <p>Likes: 1</p>
-                          <p className='likes'>
-                            <i className='material-icons'>favorite_border</i>
+                          <p>Likes: {post?.likes?.length}</p>
+                          <p
+                            className={`likes ${
+                              post?.likes?.includes(userId) && 'active'
+                            }`}
+                            onClick={() => addUserLike(post.id, userId)}
+                          >
+                            <i className='material-icons'>
+                              {post?.likes?.includes(userId)
+                                ? 'favorite'
+                                : 'favorite_border'}
+                            </i>
                           </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='row'>
+                    <div className='col m3'></div>
+                    <div className='col m9'>
+                      <div className='comments'>
+                        <p className='comment-title'>Comments</p>
+                        {post?.comments?.map((comment: string) => (
+                          <div className='comment'>{comment}</div>
+                        ))}
+                        <div className='block-addcomment'>
+                          <form
+                            className='comment-form'
+                            onSubmit={(e) => addUserComment(e, post.id)}
+                          >
+                            <div className='row'>
+                              <div className='col s12 post-field'>
+                                <textarea
+                                  id='icon_prefix2'
+                                  className='materialize-textarea'
+                                  placeholder='Input comment'
+                                  value={comment}
+                                  onChange={(e) => setComment(e.target.value)}
+                                ></textarea>
+                                <button
+                                  className='btn waves-effect waves btn-post'
+                                  onClick={(e) => addUserComment(e, post.id)}
+                                >
+                                  Add
+                                </button>
+                              </div>
+                            </div>
+                          </form>
                         </div>
                       </div>
                     </div>
