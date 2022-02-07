@@ -2,12 +2,19 @@ import express from 'express';
 import mediaService from '../services/media.service';
 
 class MediaController {
-  async getChats(req: express.Request, res: express.Response) {
+  getPhoto(req: express.Request, res: express.Response) {
+    const name = req.params.name;
+
+    return res.sendFile(`${process.env.ROOT_PATH}/public/uploads/${name}`);
+  }
+
+  async getMedia(req: express.Request, res: express.Response) {
     try {
       const id = req.params.id;
-      const chats = await mediaService.getChats(Number(id));
+      console.log(id);
+      const photos = await mediaService.getMedia(id);
 
-      return res.json({ chats });
+      return res.json({ photos });
     } catch (err: any) {
       if (err.status) {
         res.status(err.status).json({ error: { message: err.message } });
@@ -20,14 +27,17 @@ class MediaController {
   async addMedia(req: express.Request, res: express.Response) {
     try {
       const files = req.files;
+      const id = req.params.id;
+      let photo: any;
       if (files) {
-        await mediaService.addPhoto(
+        photo = await mediaService.addPhoto(
           JSON.parse(JSON.stringify(files)).avatar[0].filename,
-          JSON.parse(JSON.stringify(files)).avatar[0].path
+          JSON.parse(JSON.stringify(files)).avatar[0].path,
+          id
         );
       }
 
-      return res.json({ files });
+      return res.json({ photo });
     } catch (err: any) {
       if (err.status) {
         res.status(err.status).json({ error: { message: err.message } });

@@ -24,4 +24,6 @@ const multipleUpload = upload.fields([
 
 export const mediaRouter = Router();
 
-mediaRouter.post('/', multipleUpload, mediaController.addMedia);
+mediaRouter.post('/:id', multipleUpload, mediaController.addMedia);
+mediaRouter.get('/:id', multipleUpload, mediaController.getMedia);
+mediaRouter.get('/photo/:name', mediaController.getPhoto);

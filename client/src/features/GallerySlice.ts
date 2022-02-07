@@ -2,32 +2,32 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import GalleryService from '../services/GalleryService';
 
 const initialState = {
-  photos: [{}],
+  photos: [] as any,
   isLoading: false,
 };
 
-// export const getChats = createAsyncThunk(
-//   'chat/getchats',
-//   async (id: number, { rejectWithValue }) => {
-//     setLoading(true);
-//     try {
-//       const response = await ChatService.getChats(id);
+export const getPhotos = createAsyncThunk(
+  'gallery/getphotos',
+  async (id: number, { rejectWithValue }) => {
+    setLoading(true);
+    try {
+      const response = await GalleryService.getPhotos(id);
 
-//       return response.data;
-//     } catch (err: any) {
-//       return rejectWithValue(err.response?.data?.message);
-//     } finally {
-//       setLoading(false);
-//     }
-//   }
-// );
+      return response.data;
+    } catch (err: any) {
+      return rejectWithValue(err.response?.data?.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+);
 
 export const addPhoto = createAsyncThunk(
   'gallery/addphotos',
-  async (data: FormData, { rejectWithValue }) => {
+  async ({ data, id }: { data: FormData; id: number }, { rejectWithValue }) => {
     setLoading(true);
     try {
-      const response = await GalleryService.addPhoto(data);
+      const response = await GalleryService.addPhoto(data, id);
 
       return response.data;
     } catch (err: any) {
@@ -50,20 +50,14 @@ const gallerySlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // builder.addCase(getChats.fulfilled, (state, action) => {
-    //   state.chats = action.payload.chats;
-    //   state.profiles = action.payload.profiles;
-    // });
-    // builder.addCase(getChats.rejected, (state, action) => {
-    //   console.log(action.payload);
-    // });
+    builder.addCase(getPhotos.fulfilled, (state, action) => {
+      state.photos = action.payload.photos;
+    });
+    builder.addCase(getPhotos.rejected, (state, action) => {
+      console.log(action.payload);
+    });
     builder.addCase(addPhoto.fulfilled, (state, action) => {
-      
-      if (Array.isArray(action.payload.files.avatar)) {
-        // console.log(URL.createObjectURL(action.payload.files.avatar[0]));
-        // state.photos = [];
-        state.photos = [...state.photos, ...action.payload.files.avatar];
-      }
+      state.photos = [...state.photos, action.payload.photo]
     });
     builder.addCase(addPhoto.rejected, (state, action) => {
       console.log(action.payload);

@@ -1,12 +1,15 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { photos, addPhoto } from '../../features/GallerySlice';
+import { photos, addPhoto, getPhotos } from '../../features/GallerySlice';
+import { id } from '../../features/AuthSlice';
+import { PhotoResponse } from '../../models/response/GalleryResponse';
 
 const Media = () => {
   const dispatch = useDispatch();
   const [files, setFiles] = useState<FileList | null>();
   const [src, setSrc] = useState('');
   const userPhotos = useSelector(photos);
+  const userId = useSelector(id);
 
   const sendPictures = (e: FormEvent) => {
     e.preventDefault();
@@ -14,14 +17,13 @@ const Media = () => {
       const data = new FormData();
       data.append('avatar', files[0]);
 
-      dispatch(addPhoto(data));
-
-      // axios.post('http://localhost:5000/api/media/', data).then((res) => {
-      //   setFiles(null);
-      //   setSrc(URL.createObjectURL(res.data.files.avatar[0]));
-      // });
+      dispatch(addPhoto({ data, id: userId }));
     }
   };
+
+  useEffect(() => {
+    dispatch(getPhotos(userId));
+  }, [dispatch, userId]);
 
   return (
     <div>
@@ -49,18 +51,20 @@ const Media = () => {
         </div>
       </form>
       <div className='photos'>
-        {/* {userPhotos &&
-          userPhotos[1] &&
-          userPhotos?.map((photo: Blob | MediaSource) => {
-            if (photo) {
-              return ( */}
-                {/* {userPhotos && userPhotos[1] && (<div>
-                  <img src={URL.createObjectURL(userPhotos[1])} alt='photo1' />
-                </div>)} */}
-              {/* );
-            }
-          })} */}
-        {/* <img src={src} alt='photo1' /> */}
+        <div className='row'>
+          {userPhotos?.map((photo: PhotoResponse['photo']) => {
+            return (
+              <div className='col s12 m4 l3' key={photo.id}>
+                <div className='photo_item'>
+                  <img
+                    src={`http://localhost:5000/api/media/photo/${photo.name}`}
+                    alt={photo.name}
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

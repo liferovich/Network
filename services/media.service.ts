@@ -1,28 +1,29 @@
 import { sequelize } from '../database/database.state';
-import { Op } from 'sequelize';
 
 class MediaService {
-  async getChats(id: number) {
-    let chats = await sequelize.model('Chat').findAll({
+  async getMedia(id: string) {
+    let photos = await sequelize.model('Photo').findAll({
       where: {
-        members: { [Op.contains]: [id] },
+        UserId: id,
       },
+      order: [['createdAt', 'DESC']],
     });
 
-    if (!chats) {
-      chats = [];
+    if (!photos) {
+      photos = [];
     }
 
-    return chats;
+    return photos;
   }
 
-  async addPhoto(name: string, path: string) {
-    sequelize.model('Photo').create({
+  async addPhoto(name: string, path: string, id: string) {
+    const photo = sequelize.model('Photo').create({
       name,
       path,
+      UserId: id,
     });
 
-    return;
+    return photo;
   }
 }
 

@@ -1,13 +1,19 @@
 import { AxiosResponse } from 'axios';
 import api from '../http';
-import { GalleryResponse } from '../models/response/GalleryResponse';
+import {
+  PhotoResponse,
+  PhotosResponse,
+} from '../models/response/GalleryResponse';
 
 export default class GalleryService {
-  static async getChats(id: number): Promise<AxiosResponse<FormData>> {
-    return api.get<FormData>(`/chats/${id}`);
+  static async getPhotos(id: number): Promise<AxiosResponse<PhotosResponse>> {
+    return api.get<PhotosResponse>(`/media/${id}`);
   }
 
-  static async addPhoto(data:FormData): Promise<AxiosResponse<GalleryResponse>> {
-    return api.post<GalleryResponse>(`/media/`, data);
+  static async addPhoto(
+    data: FormData,
+    id: number
+  ): Promise<AxiosResponse<PhotoResponse>> {
+    return api.post<PhotoResponse>(`/media/${id}`, data);
   }
 }
