@@ -5,7 +5,7 @@ dotenv.config();
 export const sequelize = new Sequelize(
   'network',
   'postgres',
-  process.env.DB_PASSWORD,
+  'ONM08112021onm',
   {
     host: 'localhost',
     dialect: 'postgres',

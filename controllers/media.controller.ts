@@ -5,13 +5,12 @@ class MediaController {
   getPhoto(req: express.Request, res: express.Response) {
     const name = req.params.name;
 
-    return res.sendFile(`${process.env.ROOT_PATH}/public/uploads/${name}`);
+    return res.sendFile(`D:/work/Network/public/uploads/${name}`);
   }
 
   async getMedia(req: express.Request, res: express.Response) {
     try {
       const id = req.params.id;
-      console.log(id);
       const photos = await mediaService.getMedia(id);
 
       return res.json({ photos });

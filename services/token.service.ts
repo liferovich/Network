@@ -7,14 +7,14 @@ class TokenService {
   generateTokens(payload: { email: string; id: number; isActivated: boolean }) {
     const accessToken = jwt.sign(
       payload,
-      process.env.JWT_ACCESS_SECRET as string,
+      'access-secret-from-nataly' as string,
       {
         expiresIn: '30m',
       }
     );
     const refreshToken = jwt.sign(
       payload,
-      process.env.JWT_REFRESH_SECRET as string,
+      'refresh-secret-from-nataly' as string,
       {
         expiresIn: '30d',
       }

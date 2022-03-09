@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { photos, addPhoto, getPhotos } from '../../features/GallerySlice';
 import { id } from '../../features/AuthSlice';
 import { PhotoResponse } from '../../models/response/GalleryResponse';
+import './Media.css';
 
 const Media = () => {
   const dispatch = useDispatch();
@@ -27,9 +28,9 @@ const Media = () => {
 
   return (
     <div>
-      <form encType='multipart/form-data' onSubmit={sendPictures}>
+      <form className='mediaForm' encType='multipart/form-data' onSubmit={sendPictures}>
         <div className='form-group'>
-          <label htmlFor='picture'>Upload picture</label>
+          {/* <label htmlFor='picture'>Upload picture</label> */}
           <input
             type='file'
             name='avatar'
